@@ -1,0 +1,45 @@
+<div class = "row">
+  <div class="entry"><span>Bill No.</span>
+  <span style="padding-left: 15px"><b>602</b></span></div>
+  <div class="entry"><app-name-autocomplete></app-name-autocomplete></div>
+  <div class="entry"><app-datepicker></app-datepicker></div>
+</div>
+
+<div class = "row">
+  <div class="entry"><mat-form-field class="example-full-width">
+    <input matInput placeholder="PO No."></mat-form-field></div>
+  <div class="entry"><mat-form-field>
+  <select matNativeControl required placeholder = "Mode of Payment">
+    <option value="cash">Cash</option>
+    <option value="cheque">Cheque</option>
+    <option value="card">Card</option>
+  </select>
+</mat-form-field></div>
+  <div class="entry"><mat-form-field class="example-full-width">
+    <input matInput placeholder="E Way Bill No."></mat-form-field></div>
+</div>
+
+<table>
+  <tr>
+  <th>Sr No.</th>
+  <th>Product</th>
+  <th>Qty</th>
+  <th>MRP</th>
+  <th>Rate</th>
+  <th>Value</th>
+  <th>Tax Rate</th>
+  <th>Tax Amt</th>
+  <th>Gross Value</th>
+</tr>
+<tr>
+  <td class = "srno"></td>
+  <td class = "product"><app-name-autocomplete></app-name-autocomplete></td>
+  <td class = "qty"><input type = "number"/></td>
+  <td class = "mrp"><input type = "number"/></td>
+  <td class = "rate"><input type = "number"/></td>
+  <td class = "value"><input type = "number"/></td>
+  <td class = "taxrate"></td>
+  <td class = "taxamt"></td>
+  <td class = "gross"></td>
+</tr>
+</table>
