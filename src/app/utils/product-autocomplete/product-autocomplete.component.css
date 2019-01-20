@@ -1,0 +1,18 @@
+.table-form .mat-form-field-wrapper{
+  padding-bottom: 0;
+}
+
+.table-form .mat-form-field-infix{
+  border-top-width: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 300px;
+}
+
+.table-form .mat-form-field-underline{
+  width: 0;
+}
+
+.table-form .mat-form-field{
+  text-align: center;
+}

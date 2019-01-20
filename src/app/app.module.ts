@@ -13,6 +13,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { DataentryComponent } from './dashboard/dataentry/dataentry.component';
 import { DatepickerComponent } from './utils/datepicker/datepicker.component';
 import { NameAutocompleteComponent } from './utils/name-autocomplete/name-autocomplete.component';
+import { ProductAutocompleteComponent } from './utils/product-autocomplete/product-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NameAutocompleteComponent } from './utils/name-autocomplete/name-autoco
     MainNavComponent,
     DataentryComponent,
     DatepickerComponent,
-    NameAutocompleteComponent
+    NameAutocompleteComponent,
+    ProductAutocompleteComponent
   ],
   imports: [
     BrowserModule,

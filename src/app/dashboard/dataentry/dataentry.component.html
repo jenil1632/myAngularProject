@@ -20,6 +20,18 @@
 </div>
 
 <table>
+  <colgroup>
+    <col style="width: 8%">
+    <col style="width: 300px">
+    <col style="width: 8%">
+    <col style="width: 10%">
+    <col style="width: 10%">
+    <col style="width: 12%">
+    <col style="width: 9%">
+    <col style="width: 12%">
+    <col style="width: 12%">
+  </colgroup>
+  <thead>
   <tr>
   <th>Sr No.</th>
   <th>Product</th>
@@ -31,15 +43,18 @@
   <th>Tax Amt</th>
   <th>Gross Value</th>
 </tr>
-<tr>
-  <td class = "srno"></td>
-  <td class = "product"><app-name-autocomplete></app-name-autocomplete></td>
+</thead>
+<tbody>
+<tr *ngFor = "let purchase of purchases; let i = index">
+  <td class = "srno">{{i+1}}</td>
+  <td class = "product"><app-product-autocomplete></app-product-autocomplete></td>
   <td class = "qty"><input type = "number"/></td>
   <td class = "mrp"><input type = "number"/></td>
   <td class = "rate"><input type = "number"/></td>
-  <td class = "value"><input type = "number"/></td>
+  <td class = "value"></td>
   <td class = "taxrate"></td>
   <td class = "taxamt"></td>
   <td class = "gross"></td>
 </tr>
+</tbody>
 </table>

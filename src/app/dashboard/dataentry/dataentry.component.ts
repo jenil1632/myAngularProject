@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PurchaseEntry } from './../../interfaces/purchase-entry';
 
 @Component({
   selector: 'app-dataentry',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataentryComponent implements OnInit {
 
-  constructor() { }
+  purchases: PurchaseEntry[];
+  constructor() {
+    this.purchases = new Array(15);
+   }
 
   ngOnInit() {
   }

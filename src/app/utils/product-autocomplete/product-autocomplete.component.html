@@ -1,6 +1,6 @@
-<form class="example-form">
+<form class = "table-form">
   <mat-form-field>
-    <input type="text" placeholder="Customer Name" aria-label="Customer Name" matInput [formControl]="myControl" [matAutocomplete]="auto" required>
+    <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" required>
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
         {{option.name}}
