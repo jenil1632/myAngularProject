@@ -1,0 +1,29 @@
+
+.entry{
+  padding: 16px;
+  margin: 0 auto;
+}
+
+input{
+  text-align: center;
+  background: #fafafa;
+  border: 0;
+  outline: none;
+}
+
+@media(min-width: 768px) {
+  .row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+   .entry{
+     width: 300px;
+   }
+
+   #new-customer-form .mat-form-field-infix{
+     width: 300px;
+   }
+
+}

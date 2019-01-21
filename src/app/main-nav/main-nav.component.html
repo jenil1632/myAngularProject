@@ -5,12 +5,12 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Data Entry</a>
-      <a mat-list-item href="#">New Customer Entry</a>
-      <a mat-list-item href="#">New Product Entry</a>
-      <a mat-list-item href="#">Invoice Print and View</a>
-      <a mat-list-item href="#">Invoice Edit</a>
-      <a mat-list-item href="#">Invoice Delete</a>
+      <a routerLink="/dataentry" routerLinkActive = "active">Data Entry</a>
+      <a routerLink="/newCustomer" routerLinkActive = "active">New Customer Entry</a>
+      <a routerLink="#" routerLinkActive = "active">New Product Entry</a>
+      <a routerLink="#" routerLinkActive = "active">Invoice Print and View</a>
+      <a routerLink="#" routerLinkActive = "active">Invoice Edit</a>
+      <a routerLink="#" routerLinkActive = "active">Invoice Delete</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

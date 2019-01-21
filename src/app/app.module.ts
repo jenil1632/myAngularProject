@@ -9,11 +9,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule, MatAutocompleteModule, MatSelectModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule, MatAutocompleteModule, MatSelectModule, MAT_DATE_LOCALE } from '@angular/material';
 import { DataentryComponent } from './dashboard/dataentry/dataentry.component';
 import { DatepickerComponent } from './utils/datepicker/datepicker.component';
 import { NameAutocompleteComponent } from './utils/name-autocomplete/name-autocomplete.component';
 import { ProductAutocompleteComponent } from './utils/product-autocomplete/product-autocomplete.component';
+import { NewCustomerEntryComponent } from './dashboard/new-customer-entry/new-customer-entry.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProductAutocompleteComponent } from './utils/product-autocomplete/produ
     DataentryComponent,
     DatepickerComponent,
     NameAutocompleteComponent,
-    ProductAutocompleteComponent
+    ProductAutocompleteComponent,
+    NewCustomerEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,7 @@ import { ProductAutocompleteComponent } from './utils/product-autocomplete/produ
     MatAutocompleteModule,
     MatSelectModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
