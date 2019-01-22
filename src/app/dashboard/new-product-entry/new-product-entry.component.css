@@ -11,6 +11,12 @@ input{
   outline: none;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #submitButton{
   display: block;
   margin: 0 auto;
@@ -22,13 +28,14 @@ input{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
   }
 
    .entry{
      width: 300px;
    }
 
-   #new-customer-form .mat-form-field-infix{
+   #new-product-form .mat-form-field-infix{
      width: 300px;
    }
 

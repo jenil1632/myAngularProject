@@ -15,6 +15,7 @@ import { DatepickerComponent } from './utils/datepicker/datepicker.component';
 import { NameAutocompleteComponent } from './utils/name-autocomplete/name-autocomplete.component';
 import { ProductAutocompleteComponent } from './utils/product-autocomplete/product-autocomplete.component';
 import { NewCustomerEntryComponent } from './dashboard/new-customer-entry/new-customer-entry.component';
+import { NewProductEntryComponent } from './dashboard/new-product-entry/new-product-entry.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NewCustomerEntryComponent } from './dashboard/new-customer-entry/new-cu
     DatepickerComponent,
     NameAutocompleteComponent,
     ProductAutocompleteComponent,
-    NewCustomerEntryComponent
+    NewCustomerEntryComponent,
+    NewProductEntryComponent
   ],
   imports: [
     BrowserModule,
