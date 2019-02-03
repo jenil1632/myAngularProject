@@ -16,6 +16,7 @@ import { NameAutocompleteComponent } from './utils/name-autocomplete/name-autoco
 import { ProductAutocompleteComponent } from './utils/product-autocomplete/product-autocomplete.component';
 import { NewCustomerEntryComponent } from './dashboard/new-customer-entry/new-customer-entry.component';
 import { NewProductEntryComponent } from './dashboard/new-product-entry/new-product-entry.component';
+import { Customer_list } from './services/customer_list.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { NewProductEntryComponent } from './dashboard/new-product-entry/new-prod
     MatAutocompleteModule,
     MatSelectModule
   ],
-  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
