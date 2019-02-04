@@ -2,9 +2,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {Product_list} from './../../services/product_list.service';
 
-export interface User {
-  name: string;
+export interface Product {
+  product_name: string;
 }
 
 @Component({
@@ -15,29 +16,30 @@ export interface User {
 })
 export class ProductAutocompleteComponent implements OnInit {
   myControl = new FormControl();
-  options: User[] = [
-    {name: 'Mary'},
-    {name: 'Shelley'},
-    {name: 'Igor'}
-  ];
-  filteredOptions: Observable<User[]>;
+  options: Product[] = [];
+  filteredOptions: Observable<Product[]>;
 
   ngOnInit() {
+    this.product_list.getProducts().subscribe(res => res.forEach(function(element){
+      this.options.push(element.product_name);
+    }));
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
-        startWith<string | User>(''),
-        map(value => typeof value === 'string' ? value : value.name),
+        startWith<string | Product>(''),
+        map(value => typeof value === 'string' ? value : value.product_name),
         map(name => name ? this._filter(name) : this.options.slice())
       );
   }
 
-  displayFn(user?: User): string | undefined {
-    return user ? user.name : undefined;
+  displayFn(user?: Product): string | undefined {
+    return user ? user.product_name : undefined;
   }
 
-  private _filter(name: string): User[] {
+  private _filter(name: string): Product[] {
     const filterValue = name.toLowerCase();
 
-    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.options.filter(option => option.product_name.toLowerCase().indexOf(filterValue) === 0);
   }
+
+  constructor(private product_list: Product_list){}
 }

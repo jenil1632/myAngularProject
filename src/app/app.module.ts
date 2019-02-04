@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { ProductAutocompleteComponent } from './utils/product-autocomplete/produ
 import { NewCustomerEntryComponent } from './dashboard/new-customer-entry/new-customer-entry.component';
 import { NewProductEntryComponent } from './dashboard/new-product-entry/new-product-entry.component';
 import { Customer_list } from './services/customer_list.service';
+import { Product_list } from './services/product_list.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { Customer_list } from './services/customer_list.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -50,7 +53,7 @@ import { Customer_list } from './services/customer_list.service';
     MatAutocompleteModule,
     MatSelectModule
   ],
-  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list],
+  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list, Product_list],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

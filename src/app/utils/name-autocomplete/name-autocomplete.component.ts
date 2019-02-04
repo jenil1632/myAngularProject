@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -12,7 +12,8 @@ export interface User {
 @Component({
   selector: 'app-name-autocomplete',
   templateUrl: './name-autocomplete.component.html',
-  styleUrls: ['./name-autocomplete.component.css']
+  styleUrls: ['./name-autocomplete.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NameAutocompleteComponent implements OnInit {
   myControl = new FormControl();

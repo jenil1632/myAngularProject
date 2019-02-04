@@ -36,6 +36,21 @@ client.connect();
        });
 });
 
+app.get('/productList', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
+       client.query('SELECT * FROM products', (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
