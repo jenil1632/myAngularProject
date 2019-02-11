@@ -41,6 +41,21 @@ app.get('/productList', (req, res)=>{
   connectionString: connectionString,
 })
 client.connect();
+       client.query('SELECT product_name FROM products', (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
+app.get('/productInfo', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
        client.query('SELECT * FROM products', (err, result)=>{
          if(err)
          {

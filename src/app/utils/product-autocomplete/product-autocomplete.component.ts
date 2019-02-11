@@ -15,15 +15,13 @@ export interface Product {
   encapsulation: ViewEncapsulation.None
 })
 export class ProductAutocompleteComponent implements OnInit {
-  myControl = new FormControl();
+  productName = new FormControl();
   options: Product[] = [];
   filteredOptions: Observable<Product[]>;
 
   ngOnInit() {
-    this.product_list.getProducts().subscribe(res => res.forEach(function(element){
-      this.options.push(element.product_name);
-    }));
-    this.filteredOptions = this.myControl.valueChanges
+    this.product_list.getProducts().subscribe(res => this.options = res);
+    this.filteredOptions = this.productName.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.product_name),
@@ -42,4 +40,5 @@ export class ProductAutocompleteComponent implements OnInit {
   }
 
   constructor(private product_list: Product_list){}
+
 }
