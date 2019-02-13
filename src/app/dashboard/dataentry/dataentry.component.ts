@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewEncapsulation, ViewChildren, AfterViewInit, QueryList } from '@angular/core';
 import { PurchaseEntry } from './../../interfaces/purchase-entry';
 import { Product_info } from './../../services/product_info.service';
+import { Bill_no } from './../../services/bill_no.service';
 import { Pdt } from './../../interfaces/pdt';
 import { FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductAutocompleteComponent} from './../../utils/product-autocomplete/product-autocomplete.component';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { Bill } from './../../interfaces/billNo';
 
 @Component({
   selector: 'app-dataentry',
@@ -17,10 +19,10 @@ export class DataentryComponent implements OnInit, AfterViewInit {
   purchases: PurchaseEntry[];
   pdts: Pdt[];
   totalProducts: number;
-  product_rate: number;
+  bill: number;
   productForm: FormGroup;
   @ViewChildren(ProductAutocompleteComponent) child: QueryList<ProductAutocompleteComponent>;
-  constructor(private product_list: Product_info) {
+  constructor(private product_list: Product_info, private bill_no: Bill_no) {
     this.purchases = new Array(15);
     this.totalProducts = 0;
    }
@@ -30,6 +32,7 @@ export class DataentryComponent implements OnInit, AfterViewInit {
      }
 
   ngOnInit() {
+    this.bill_no.getBillNo().subscribe(res => this.bill = res[0].invoice_no);
     this.productForm = new FormGroup({
       'products': new FormArray([])
     });
@@ -80,12 +83,6 @@ export class DataentryComponent implements OnInit, AfterViewInit {
         control.patchValue({"gross": taxAmt+control.get('value').value});
       });
     });
-  //   for(let j=0; j<15; j++)
-  //   {
-  //   (<FormGroup>this.someArray.at(j)).addControl('childForm', this.child.productName);
-  //   this.child.productName.setParent((<FormGroup>this.someArray.at(j)));
-  //   this.someArray.controls[j].valueChanges.subscribe((value) => console.log(value) );
-  // }
 }
 
 public getTaxRate(x: string){

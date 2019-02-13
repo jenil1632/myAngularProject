@@ -1,7 +1,7 @@
 <form [formGroup] = "productForm">
 <div class = "row">
   <div class="entry smallField"><span>Bill No.</span>
-  <span style="padding-left: 15px"><b>602</b></span></div>
+  <span style="padding-left: 15px"><b>{{bill + 1}}</b></span></div>
   <div class="entry"><app-name-autocomplete></app-name-autocomplete></div>
   <div class="entry smallField"><app-datepicker></app-datepicker></div>
 </div>
