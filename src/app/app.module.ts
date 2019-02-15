@@ -21,6 +21,7 @@ import { Customer_list } from './services/customer_list.service';
 import { Product_list } from './services/product_list.service';
 import { Product_info } from './services/product_info.service';
 import { Bill_no } from './services/bill_no.service';
+import { Data_insert } from './services/dataInsert.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { Bill_no } from './services/bill_no.service';
     MatAutocompleteModule,
     MatSelectModule
   ],
-  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list, Product_list, Product_info, Bill_no],
+  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list, Product_list, Product_info, Bill_no, Data_insert],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

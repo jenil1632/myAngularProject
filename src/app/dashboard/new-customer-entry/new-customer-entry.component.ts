@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Data_insert } from './../../services/dataInsert.service';
 
 @Component({
   selector: 'app-new-customer-entry',
@@ -8,9 +10,22 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class NewCustomerEntryComponent implements OnInit {
 
-  constructor() { }
+  customerForm: FormGroup;
+  constructor(public data_insert: Data_insert) { }
 
   ngOnInit() {
+    this.customerForm = new FormGroup({
+      'customerName': new FormControl(null, Validators.required),
+      'address': new FormControl(null),
+      'gstNo': new FormControl(null, Validators.required),
+      'contactNo': new FormControl(null, Validators.required),
+      'email': new FormControl(null),
+      'contactPerson': new FormControl(null)
+    });
+  }
+
+  onSubmit(){
+    this.data_insert.insertCustomer(this.customerForm.value).subscribe(res=> console.log(res));
   }
 
 }

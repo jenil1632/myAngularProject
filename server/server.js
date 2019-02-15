@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const http = require('http');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 const {Client} = require('pg');
 const connectionString = process.env.DATABASE_URL || 'postgres://postgres:admin@localhost:5432/Radiant';
@@ -12,7 +12,7 @@ const connectionString = process.env.DATABASE_URL || 'postgres://postgres:admin@
 const app = express();
 
 // Parsers for POST data
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
@@ -78,6 +78,22 @@ client.connect();
            res.status(400).send(err);
          }
          res.status(200).send(result.rows);
+       });
+});
+
+app.post('/insertCustomer', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();console.log(req);
+let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name) VALUES('${req.body.customerName}', '${req.body.address}', '${req.body.gstNo}', '${req.body.contactNo}', '${req.body.email}', '${req.body.contactPerson}');`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send({"message": "data inserted successfully"});
        });
 });
 
