@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Data_insert } from './../../services/dataInsert.service';
 
 @Component({
   selector: 'app-new-product-entry',
@@ -8,9 +10,28 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class NewProductEntryComponent implements OnInit {
 
-  constructor() { }
+  productForm: FormGroup;
+  constructor(public data_insert: Data_insert) { }
 
   ngOnInit() {
+    this.productForm = new FormGroup({
+      product_name: new FormControl(null, Validators.required),
+      rate: new FormControl(null, Validators.required),
+      hsn: new FormControl(null)
+    });
+  }
+
+  onSubmit(){
+    this.data_insert.insertProduct(this.productForm).subscribe(function(res){
+      if(res.message=='success')
+      {
+        alert('Product inserted successfully');
+        this.productForm.reset();
+      }
+      else{
+        alert('Error inserting Data');
+      }
+    });
   }
 
 }

@@ -25,7 +25,16 @@ export class NewCustomerEntryComponent implements OnInit {
   }
 
   onSubmit(){
-    this.data_insert.insertCustomer(this.customerForm.value).subscribe(res=> console.log(res));
+    this.data_insert.insertCustomer(this.customerForm.value).subscribe(function(res){
+      if(res.message=='success')
+      {
+        alert('Customer inserted successfully');
+        this.customerForm.reset();
+      }
+      else{
+        alert('Error inserting data');
+      }
+    });
   }
 
 }

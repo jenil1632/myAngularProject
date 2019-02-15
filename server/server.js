@@ -85,7 +85,7 @@ app.post('/insertCustomer', (req, res)=>{
   const client = new Client({
   connectionString: connectionString,
 })
-client.connect();console.log(req);
+client.connect();
 let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name) VALUES('${req.body.customerName}', '${req.body.address}', '${req.body.gstNo}', '${req.body.contactNo}', '${req.body.email}', '${req.body.contactPerson}');`;
        client.query(queryString, (err, result)=>{
          if(err)
@@ -93,7 +93,23 @@ let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,ema
            console.log(err);
            res.status(400).send(err);
          }
-         res.status(200).send({"message": "data inserted successfully"});
+         res.status(200).send({"message": "success"});
+       });
+});
+
+app.post('/insertProduct', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
+let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.body.productName}', '${req.body.rate}', '${req.body.hsn}');`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send({"message": "success"});
        });
 });
 

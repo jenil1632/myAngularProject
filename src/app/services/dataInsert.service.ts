@@ -12,4 +12,8 @@ export class Data_insert{
   public insertCustomer(formGroup: FormGroup): Observable<any>{
     return this.http.post<any>("insertCustomer", formGroup);
   }
+
+  public insertProduct(formGroup: FormGroup): Observable<any>{
+    return this.http.post<any>("insertProduct", formGroup);
+  }
 }
