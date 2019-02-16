@@ -1,0 +1,18 @@
+<form id = "invoice-delete-form" (ngSubmit)="onSubmit()" [formGroup] = "invoiceDeleteForm">
+  <div class = "row">
+  <div class="entry"><mat-form-field class="example-full-width">
+    <input matInput placeholder="Invoice No." required formControlName = "invoiceNo" type = "number"></mat-form-field></div>
+  <div class="entry"><mat-form-field class="example-full-width">
+      <input matInput placeholder="Invoice Date" formControlName = "invoiceDate"></mat-form-field></div>
+    </div>
+    <div class = "row">
+  <div class="entry"><mat-form-field class="example-full-width">
+      <input matInput placeholder="Customer Name" required formControlName = "customerName"></mat-form-field></div>
+  <div class="entry"><mat-form-field class="example-full-width">
+      <input matInput placeholder="Bill Amount" required formControlName = "billAmt"></mat-form-field></div>
+    </div>
+    <div class = "row" style = "justify-content: center">
+      <button mat-raised-button color="warn" type="submit" class = "submitButton" >Delete</button>
+      <a routerLink="/dataentry"><button mat-raised-button color="primary" class = "submitButton">Back</button></a>
+        </div>
+</form>

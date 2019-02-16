@@ -11,10 +11,10 @@ input{
   outline: none;
 }
 
-#submitButton{
+.submitButton{
   display: block;
-  margin: 0 auto;
   padding: 0 24px;
+  margin: 16px;
 }
 
 @media(min-width: 768px) {
@@ -28,7 +28,7 @@ input{
      width: 300px;
    }
 
-   #invoice-delete-form .mat-form-field-infix{
+   #new-customer-form .mat-form-field-infix{
      width: 300px;
    }
 

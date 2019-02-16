@@ -20,8 +20,11 @@ import { NewProductEntryComponent } from './dashboard/new-product-entry/new-prod
 import { Customer_list } from './services/customer_list.service';
 import { Product_list } from './services/product_list.service';
 import { Product_info } from './services/product_info.service';
+import { Invoice_info } from './services/invoice_info.service';
+import { Invoice_submit } from './services/invoice_submit.service';
 import { Bill_no } from './services/bill_no.service';
 import { Data_insert } from './services/dataInsert.service';
+import { InvoiceDeleteComponent } from './dashboard/invoice-delete/invoice-delete.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { Data_insert } from './services/dataInsert.service';
     NameAutocompleteComponent,
     ProductAutocompleteComponent,
     NewCustomerEntryComponent,
-    NewProductEntryComponent
+    NewProductEntryComponent,
+    InvoiceDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,7 @@ import { Data_insert } from './services/dataInsert.service';
     MatAutocompleteModule,
     MatSelectModule
   ],
-  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list, Product_list, Product_info, Bill_no, Data_insert],
+  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list, Product_list, Product_info, Bill_no, Data_insert, Invoice_info, Invoice_submit],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,16 +8,16 @@
 
 <div class = "row">
   <div class="entry smallField"><mat-form-field class="example-full-width">
-    <input matInput placeholder="PO No."></mat-form-field></div>
+    <input matInput placeholder="PO No." formControlName = "poNo"></mat-form-field></div>
   <div class="entry bigField"><mat-form-field>
-  <select matNativeControl required placeholder = "Mode of Payment">
+  <select matNativeControl placeholder = "Mode of Payment" formControlName = "paymentMode">
     <option value="cash">Cash</option>
     <option value="cheque">Cheque</option>
     <option value="card">Card</option>
   </select>
 </mat-form-field></div>
   <div class="entry smallField"><mat-form-field class="example-full-width">
-    <input matInput placeholder="E Way Bill No."></mat-form-field></div>
+    <input matInput placeholder="E Way Bill No." formControlName = "ewayNo"></mat-form-field></div>
 </div>
 
 <table formArrayName = "products">

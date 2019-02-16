@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Invoice_submit } from './../services/invoice_submit.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -16,6 +17,10 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private invoice_submit: Invoice_submit) {}
 
+  submitForm()
+  {
+    this.invoice_submit.setState(true);
+  }
 }

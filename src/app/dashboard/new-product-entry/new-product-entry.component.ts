@@ -15,7 +15,7 @@ export class NewProductEntryComponent implements OnInit {
 
   ngOnInit() {
     this.productForm = new FormGroup({
-      product_name: new FormControl(null, Validators.required),
+      productName: new FormControl(null, Validators.required),
       rate: new FormControl(null, Validators.required),
       hsn: new FormControl(null)
     });

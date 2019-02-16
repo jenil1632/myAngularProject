@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-datepicker',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatepickerComponent implements OnInit {
 
+  invoiceDate = new FormControl();
   minDate: Date;
   maxDate: Date;
   constructor() {

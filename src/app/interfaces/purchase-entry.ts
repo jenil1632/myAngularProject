@@ -1,6 +1,7 @@
 export interface PurchaseEntry {
 
-  srno: number;
+  invoiceno: number;
+  invoicedate: Date;
   productName: string;
   qty: number;
   mrp: number;

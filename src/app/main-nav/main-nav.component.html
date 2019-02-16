@@ -10,8 +10,8 @@
       <a routerLink="/newProduct" routerLinkActive = "active">New Product Entry</a>
       <a routerLink="#" routerLinkActive = "active">Invoice Print and View</a>
       <a routerLink="#" routerLinkActive = "active">Invoice Edit</a>
-      <a routerLink="#" routerLinkActive = "active">Invoice Delete</a>
-      <button mat-raised-button color="accent" id = "submitButton" *ngIf = "router.url == '/dataentry'">Save</button>
+      <a routerLink="/invoiceDelete" routerLinkActive = "active">Invoice Delete</a>
+      <button mat-raised-button color="accent" id = "submitButton" *ngIf = "router.url == '/dataentry'" (click) = "submitForm()">Save</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -113,6 +113,38 @@ let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.bo
        });
 });
 
+app.post('/invoiceInfo', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
+let queryString = `SELECT FROM datatable WHERE invoice_no = ${req.body.invoiceNo};`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
+app.post('/insertInvoice', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
+let queryString = `INSERT INTO datatable (invoice_no, invoice_date, cust_name, order_no, po_no, po_date, eway_no, product_des, qty, mrp, unit_price, t_value, tax_rate, tax_value, bill_value) VALUES ();`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

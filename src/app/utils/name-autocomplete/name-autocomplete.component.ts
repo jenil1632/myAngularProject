@@ -16,13 +16,13 @@ export interface User {
   encapsulation: ViewEncapsulation.None
 })
 export class NameAutocompleteComponent implements OnInit {
-  myControl = new FormControl();
+  customerName = new FormControl();
   options: User[] = [];
   filteredOptions: Observable<User[]>;
 
   ngOnInit() {
     this.customer_list.getCustomers().subscribe(res => this.options = res);
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = this.customerName.valueChanges
       .pipe(
         startWith<string | User>(''),
         map(value => typeof value === 'string' ? value : value.cust_name),

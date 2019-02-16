@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { DataentryComponent} from './dashboard/dataentry/dataentry.component'
 import { NewCustomerEntryComponent} from './dashboard/new-customer-entry/new-customer-entry.component';
 import { NewProductEntryComponent} from './dashboard/new-product-entry/new-product-entry.component';
+import { InvoiceDeleteComponent} from './dashboard/invoice-delete/invoice-delete.component';
 
-const routes: Routes = [{path: 'dataentry', component: DataentryComponent}, {path: 'newCustomer', component: NewCustomerEntryComponent}, {path: 'newProduct', component: NewProductEntryComponent}, {path: '**', redirectTo: '/dataentry', pathMatch: 'full'}];
+const routes: Routes = [{path: 'dataentry', component: DataentryComponent}, {path: 'newCustomer', component: NewCustomerEntryComponent}, {path: 'newProduct', component: NewProductEntryComponent}, {path: 'invoiceDelete', component: InvoiceDeleteComponent}, {path: '**', redirectTo: '/dataentry', pathMatch: 'full'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
