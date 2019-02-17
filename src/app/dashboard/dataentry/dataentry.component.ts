@@ -40,16 +40,16 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
       if(res)
       {
         this.productForm.addControl('invoiceNo', new FormControl(this.bill+1, Validators.required));
-        // this.data_insert.insertInvoice(this.productForm).subscribe(function(s){
-        //   if(s=='success')
-        //   {
-        //     alert('Invoice entered successfully');
-        //     this.productForm.reset();
-        //   }
-        //   else{
-        //     alert('Error inserting invoice');
-        //   }
-        // });
+        this.data_insert.insertInvoice(this.productForm).subscribe(function(s){
+          if(s.message=='success')
+          {
+            alert('Invoice entered successfully');
+            this.productForm.reset();
+          }
+          else{
+            alert('Error inserting invoice');
+          }
+        });
       }
     });
    }
