@@ -8,6 +8,8 @@ import { Pdt } from './../../interfaces/pdt';
 import { FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductAutocompleteComponent} from './../../utils/product-autocomplete/product-autocomplete.component';
 import { NameAutocompleteComponent } from './../../utils/name-autocomplete/name-autocomplete.component';
+import { DatepickerComponent } from './../../utils/datepicker/datepicker.component';
+import { PodateComponent } from './../../utils/podate/podate.component';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Bill } from './../../interfaces/billNo';
 import { Subscription } from 'rxjs';
@@ -28,22 +30,26 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
   productForm: FormGroup;
   @ViewChildren(ProductAutocompleteComponent) child: QueryList<ProductAutocompleteComponent>;
   @ViewChild(NameAutocompleteComponent) nChild: NameAutocompleteComponent;
+  @ViewChild(DatepickerComponent) dChild: DatepickerComponent;
+  @ViewChild(PodateComponent) pChild: PodateComponent;
   constructor(private product_list: Product_info, private bill_no: Bill_no, private invoice_submit: Invoice_submit, private data_insert: Data_insert) {
     this.purchases = new Array(15);
     this.totalProducts = 0;
-    this.subscription = this.invoice_submit.getState().subscribe(function(res){
+    this.bill_no.getBillNo().subscribe(res => this.bill = res[0].invoice_no);
+    this.subscription = this.invoice_submit.getState().subscribe(res =>{
       if(res)
       {
-        this.data_insert.insertInvoice(this.productForm).subscribe(function(s){
-          if(s=='success')
-          {
-            alert('Invoice entered successfully');
-            this.productForm.reset();
-          }
-          else{
-            alert('Error inserting invoice');
-          }
-        });
+        this.productForm.addControl('invoiceNo', new FormControl(this.bill+1, Validators.required));
+        // this.data_insert.insertInvoice(this.productForm).subscribe(function(s){
+        //   if(s=='success')
+        //   {
+        //     alert('Invoice entered successfully');
+        //     this.productForm.reset();
+        //   }
+        //   else{
+        //     alert('Error inserting invoice');
+        //   }
+        // });
       }
     });
    }
@@ -53,10 +59,7 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
      }
 
   ngOnInit() {
-    this.bill_no.getBillNo().subscribe(res => this.bill = res[0].invoice_no);
     this.productForm = new FormGroup({
-      'invoiceNo': new FormControl(this.bill, Validators.required),
-      'invoiceDate': new FormControl(null, Validators.required),
       'paymentMode': new FormControl(null, Validators.required),
       'poNo': new FormControl(null),
       'ewayNo': new FormControl(null),
@@ -79,6 +82,8 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(){
     this.productForm.addControl('customerName', this.nChild.customerName);
+    this.productForm.addControl('invoiceDate', this.dChild.invoiceDate);
+    this.productForm.addControl('poDate', this.pChild.poDate);
     let arr: ProductAutocompleteComponent[] = this.child.toArray();
     let j = 0;
     this.someArray.controls.forEach(control =>{

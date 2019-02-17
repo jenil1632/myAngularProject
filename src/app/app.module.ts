@@ -25,6 +25,7 @@ import { Invoice_submit } from './services/invoice_submit.service';
 import { Bill_no } from './services/bill_no.service';
 import { Data_insert } from './services/dataInsert.service';
 import { InvoiceDeleteComponent } from './dashboard/invoice-delete/invoice-delete.component';
+import { PodateComponent } from './utils/podate/podate.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { InvoiceDeleteComponent } from './dashboard/invoice-delete/invoice-delet
     ProductAutocompleteComponent,
     NewCustomerEntryComponent,
     NewProductEntryComponent,
-    InvoiceDeleteComponent
+    InvoiceDeleteComponent,
+    PodateComponent
   ],
   imports: [
     BrowserModule,

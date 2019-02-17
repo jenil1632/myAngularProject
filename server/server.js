@@ -134,15 +134,24 @@ app.post('/insertInvoice', (req, res)=>{
   connectionString: connectionString,
 })
 client.connect();
-let queryString = `INSERT INTO datatable (invoice_no, invoice_date, cust_name, order_no, po_no, po_date, eway_no, product_des, qty, mrp, unit_price, t_value, tax_rate, tax_value, bill_value) VALUES ();`;
-       client.query(queryString, (err, result)=>{
-         if(err)
-         {
-           console.log(err);
-           res.status(400).send(err);
-         }
-         res.status(200).send(result.rows);
-       });
+let count = 97;
+let updateCount = 0;
+for(let i=0; i<15;i++)
+{
+  if(req.body.products[i].childForm)
+  {
+    let orderno = req.body.invoiceNo + String.fromCharCode(count);
+    let queryString = `INSERT INTO datatable (invoice_no, invoice_date, cust_name, order_no, po_no, po_date, eway_no, product_des, qty, mrp, unit_price, t_value, tax_rate, tax_value, bill_value) VALUES (${req.body.invoiceNo}, ${req.body.invoiceDate}, ${req.body.customerName.cust_name}, ${orderno}, ${req.body.poNo}, ${req.body.poDate}, ${req.body.ewayNo}, ${req.body.products[i].childForm.productName}, ${req.body.products[i].qty}, ${req.body.products[i].mrp}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross});`;
+    client.query(queryString, (err, result)=>{
+      if(err)
+      {
+        console.log(err);
+        res.status(400).send(err);
+      }
+    });
+    count++;
+  }
+}
 });
 
 
