@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {Customer_list} from './../../services/customer_list.service';
@@ -16,7 +16,7 @@ export interface User {
   encapsulation: ViewEncapsulation.None
 })
 export class NameAutocompleteComponent implements OnInit {
-  customerName = new FormControl();
+  customerName = new FormControl(null, Validators.required);
   options: User[] = [];
   filteredOptions: Observable<User[]>;
 

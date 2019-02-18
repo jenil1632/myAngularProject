@@ -60,7 +60,7 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.productForm = new FormGroup({
-      'paymentMode': new FormControl(null, Validators.required),
+      'paymentMode': new FormControl(null),
       'poNo': new FormControl(null),
       'ewayNo': new FormControl(null),
       'products': new FormArray([])

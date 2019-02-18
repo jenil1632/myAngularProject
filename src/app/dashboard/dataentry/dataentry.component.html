@@ -1,4 +1,4 @@
-<div class = "row">
+<div class = "row" style = "padding: 16px 0">
   <div class="entry smallField"><span>Bill No.</span>
   <span style="padding-left: 15px"><b>{{bill + 1}}</b></span></div>
 </div>
@@ -14,6 +14,7 @@
 <div class = "row">
   <div class="entry bigField"><mat-form-field>
   <select matNativeControl placeholder = "Mode of Payment" formControlName = "paymentMode">
+    <option value=""></option>
     <option value="cash">Cash</option>
     <option value="cheque">Cheque</option>
     <option value="card">Card</option>
@@ -50,7 +51,7 @@
 </tr>
 </thead>
 <tbody>
-<tr *ngFor = "let productControl of productForm.get('products').controls; let i = index" [formGroupName] = "i">
+<tr *ngFor = "let productControl of productForm.get('products').controls; let i = index;" [formGroupName] = "i">
   <td class = "srno">{{i+1}}</td>
   <td class = "product"><app-product-autocomplete></app-product-autocomplete></td>
   <td class = "qty"><input type = "number" formControlName = "qty"/></td>
