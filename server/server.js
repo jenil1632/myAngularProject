@@ -118,7 +118,23 @@ app.post('/invoiceInfo', (req, res)=>{
   connectionString: connectionString,
 })
 client.connect();
-let queryString = `SELECT FROM datatable WHERE invoice_no = ${req.body.invoiceNo};`;
+let queryString = `SELECT * FROM datatable WHERE invoice_no = ${req.body.invoiceNo};`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
+app.post('/billAmt', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
+let queryString = `SELECT SUM(bill_value) FROM datatable WHERE invoice_no = ${req.body.invoiceNo} GROUP BY invoice_no;`;
        client.query(queryString, (err, result)=>{
          if(err)
          {
@@ -164,6 +180,22 @@ for(let i=0; i<15;i++)
   }
 }
 res.status(200).send({"message": "success"});
+});
+
+app.delete('/deleteInvoice/:invoiceNo', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
+let queryString = `DELETE FROM datatable WHERE invoice_no = ${req.params.invoiceNo};`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send({"message": "success"});
+       });
 });
 
 

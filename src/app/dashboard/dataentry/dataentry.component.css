@@ -47,7 +47,7 @@ input[type=number]::-webkit-outer-spin-button {
      width: 200px;
    }
 
-   .qty input, .mrp input, .rate input, .taxrate input, .value input, .taxamt input, .gross input{
+   .qty input, .mrp input, .rate input, .taxrate input, .value input, .taxamt input, .gross input, .totalValue input, .totalGross input, .totalTaxAmt input{
      width: 100%;
      height: 25px;
      font-size: 16px;

@@ -17,6 +17,10 @@ input{
   margin: 16px;
 }
 
+.entry .mat-form-field-infix{
+  width: 300px;
+}
+
 @media(min-width: 768px) {
   .row{
     display: flex;

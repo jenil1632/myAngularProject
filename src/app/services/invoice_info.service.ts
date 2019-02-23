@@ -8,7 +8,11 @@ export class Invoice_info{
 
   constructor(private http: HttpClient){ }
 
-  public getProducts(): Observable<PurchaseEntry[]>{
-    return this.http.get<PurchaseEntry[]>("invoiceInfo");
+  public getInvoiceInfo(invoiceNo): Observable<any>{
+    return this.http.post<any>("invoiceInfo", invoiceNo);
+  }
+
+  public getBillAmt(invoiceNo): Observable<any>{
+    return this.http.post<any>("billAmt", invoiceNo);
   }
 }

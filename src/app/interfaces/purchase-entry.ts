@@ -10,4 +10,5 @@ export interface PurchaseEntry {
   taxRate: number;
   taxAmt: number;
   gross: number;
+  customerName: string;
 }

@@ -63,6 +63,9 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
       'paymentMode': new FormControl(null),
       'poNo': new FormControl(null),
       'ewayNo': new FormControl(null),
+      'totalValue': new FormControl({value: 0, disabled: true}),
+      'totalTaxAmt': new FormControl({value: 0, disabled: true}),
+      'totalGross': new FormControl({value: 0, disabled: true}),
       'products': new FormArray([])
     });
     for(let j=0;j<15;j++)
@@ -91,11 +94,9 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
       arr[j].productName.setParent(<FormGroup>control);
       j++;
       control.get('childForm').valueChanges.pipe(distinctUntilChanged()).subscribe(()=>{
-        //console.log(this.someArray.controls.indexOf(control));
-        console.log(control.get('childForm').value.product_name);
           let taxRate = this.getTaxRate(control.get('childForm').value.product_name);
           if(taxRate)
-          {console.log(taxRate);
+          {
             control.patchValue({"taxRate": taxRate.rate});
           }
           else{
@@ -114,6 +115,20 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
         control.patchValue({"taxAmt": taxAmt})
         control.patchValue({"gross": taxAmt+control.get('value').value});
       });
+      control.get('value').valueChanges.pipe(distinctUntilChanged()).subscribe(()=>{
+        let tValue = this.someArray.controls.reduce((accumalator, currentValue)=>{
+          return currentValue.get('value').value + accumalator;
+        }, 0);
+        let tTaxAmt = this.someArray.controls.reduce((accumalator, currentValue)=>{
+          return currentValue.get('taxAmt').value + accumalator;
+        }, 0);
+        let tGross = this.someArray.controls.reduce((accumalator, currentValue)=>{
+          return currentValue.get('gross').value + accumalator;
+        }, 0);
+        this.productForm.patchValue({"totalValue": tValue});
+        this.productForm.patchValue({"totalTaxAmt": tTaxAmt});
+        this.productForm.patchValue({"totalGross": tGross});
+      })
     });
 }
 
