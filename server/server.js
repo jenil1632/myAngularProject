@@ -166,7 +166,7 @@ for(let i=0; i<15;i++)
     month = pDate.getMonth();
     year = pDate.getFullYear();
     let poDate = `${day}-${month}-${year}`;
-    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,mrp,unit_price,t_value,tax_rate,tax_value,bill_value) VALUES (${req.body.invoiceNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].mrp}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross});`;
+    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,mrp,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.invoiceNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].mrp}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, ${req.body.products[i].paymentMode});`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)

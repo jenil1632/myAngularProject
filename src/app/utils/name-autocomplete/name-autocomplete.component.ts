@@ -31,6 +31,7 @@ export class NameAutocompleteComponent implements OnInit {
   }
 
   displayFn(user?: User): string | undefined {
+    //return user? user.cust_name : 'nola';
     return user ? user.cust_name : undefined;
   }
 

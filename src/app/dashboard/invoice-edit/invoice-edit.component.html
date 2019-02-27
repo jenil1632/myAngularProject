@@ -1,0 +1,88 @@
+<form [formGroup] = "productForm">
+<div class = "row" style = "padding: 16px 0">
+  <div class="entry smallField">
+    <input placeholder="Bill No." formControlName = "billNo" type="number" id = "billNo"></div>
+</div>
+
+
+<div class = "row">
+  <div class="entry"><app-name-autocomplete></app-name-autocomplete></div>
+  <div class="entry smallField"><app-datepicker></app-datepicker></div>
+  <div class="entry smallField"><mat-form-field class="example-full-width">
+    <input matInput placeholder="E Way Bill No." formControlName = "ewayNo"></mat-form-field></div>
+</div>
+
+<div class = "row">
+  <div class="entry bigField"><mat-form-field>
+  <select matNativeControl placeholder = "Mode of Payment" formControlName = "paymentMode">
+    <option value=""></option>
+    <option value="cash">Cash</option>
+    <option value="cheque">Cheque</option>
+    <option value="card">Card</option>
+  </select>
+</mat-form-field></div>
+  <div class="entry smallField"><mat-form-field class="example-full-width">
+    <input matInput placeholder="PO No." formControlName = "poNo"></mat-form-field></div>
+    <div class="entry smallField"><app-podate></app-podate></div>
+</div>
+
+<table formArrayName = "products">
+  <colgroup>
+    <col style="width: 8%">
+    <col style="width: 300px">
+    <col style="width: 8%">
+    <col style="width: 10%">
+    <col style="width: 10%">
+    <col style="width: 12%">
+    <col style="width: 9%">
+    <col style="width: 12%">
+    <col style="width: 12%">
+  </colgroup>
+  <thead>
+  <tr>
+  <th>Sr No.</th>
+  <th>Product</th>
+  <th>Qty</th>
+  <th>MRP</th>
+  <th>Rate</th>
+  <th>Value</th>
+  <th>Tax Rate</th>
+  <th>Tax Amt</th>
+  <th>Gross Value</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor = "let productControl of productForm.get('products').controls; let i = index;" [formGroupName] = "i">
+  <td class = "srno">{{i+1}}</td>
+  <td class = "product"><app-product-autocomplete></app-product-autocomplete></td>
+  <td class = "qty"><input type = "number" formControlName = "qty"/></td>
+  <td class = "mrp"><input type = "number" formControlName = "mrp"/></td>
+  <td class = "rate"><input type = "number" formControlName = "rate"/></td>
+  <td class = "value"><input type = "number" formControlName = "value"/></td>
+  <td class = "taxrate"><input type = "number" formControlName = "taxRate"/></td>
+  <td class = "taxamt"><input type = "number" formControlName = "taxAmt"/></td>
+  <td class = "gross"><input type = "number" formControlName = "gross"/></td>
+</tr>
+</tbody>
+</table>
+<table>
+  <colgroup>
+    <col style="width: 8%">
+    <col style="width: 300px">
+    <col style="width: 8%">
+    <col style="width: 10%">
+    <col style="width: 10%">
+    <col style="width: 12%">
+    <col style="width: 9%">
+    <col style="width: 12%">
+    <col style="width: 12%">
+  </colgroup>
+  <tr>
+  <td colspan="5" style="background: #3f51b5; color: white">Total</td>
+  <td class = "totalValue" style="background: #3f51b5"><input type = "number" formControlName = "totalValue" style="background: #3f51b5; color: white"/></td>
+  <td style="background: #3f51b5"></td>
+  <td class = "totalTaxAmt" style="background: #3f51b5"><input type = "number" formControlName = "totalTaxAmt" style="background: #3f51b5; color: white"/></td>
+  <td class = "totalGross" style="background: #ff4081"><input type = "number" formControlName = "totalGross" style="background: #ff4081; color: white"/></td>
+  </tr>
+</table>
+</form>
