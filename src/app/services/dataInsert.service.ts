@@ -20,4 +20,8 @@ export class Data_insert{
   public insertInvoice(formGroup: FormGroup): Observable<any>{
     return this.http.post<any>("insertInvoice", formGroup.getRawValue());
   }
+
+  public editInvoice(formGroup: FormGroup): Observable<any>{
+    return this.http.post<any>("editInvoice", formGroup.getRawValue());
+  }
 }

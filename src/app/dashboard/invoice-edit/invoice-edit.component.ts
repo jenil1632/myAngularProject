@@ -40,8 +40,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.invoice_submit.getState().subscribe(res =>{
       if(res)
       {
-        this.productForm.addControl('invoiceNo', new FormControl(this.bill+1, Validators.required));
-        this.data_insert.insertInvoice(this.productForm).subscribe(function(s){
+        this.data_insert.editInvoice(this.productForm).subscribe(function(s){
           if(s.message=='success')
           {
             alert('Invoice entered successfully');
