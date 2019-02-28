@@ -110,14 +110,6 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         let taxAmt = control.get('taxRate').value*control.get('value').value/100;
         control.patchValue({"taxAmt": taxAmt})
         control.patchValue({"gross": taxAmt+control.get('value').value});
-      });
-      control.get('rate').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
-        control.patchValue({"value": e*control.get('qty').value});
-        let taxAmt = control.get('taxRate').value*control.get('value').value/100;
-        control.patchValue({"taxAmt": taxAmt})
-        control.patchValue({"gross": taxAmt+control.get('value').value});
-      });
-      control.get('value').valueChanges.pipe(distinctUntilChanged()).subscribe(()=>{
         let tValue = this.someArray.controls.reduce((accumalator, currentValue)=>{
           return currentValue.get('value').value + accumalator;
         }, 0);
@@ -130,7 +122,25 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.productForm.patchValue({"totalValue": tValue});
         this.productForm.patchValue({"totalTaxAmt": tTaxAmt});
         this.productForm.patchValue({"totalGross": tGross});
-      })
+      });
+      control.get('rate').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
+        control.patchValue({"value": e*control.get('qty').value});
+        let taxAmt = control.get('taxRate').value*control.get('value').value/100;
+        control.patchValue({"taxAmt": taxAmt})
+        control.patchValue({"gross": taxAmt+control.get('value').value});
+        let tValue = this.someArray.controls.reduce((accumalator, currentValue)=>{
+          return currentValue.get('value').value + accumalator;
+        }, 0);
+        let tTaxAmt = this.someArray.controls.reduce((accumalator, currentValue)=>{
+          return currentValue.get('taxAmt').value + accumalator;
+        }, 0);
+        let tGross = this.someArray.controls.reduce((accumalator, currentValue)=>{
+          return currentValue.get('gross').value + accumalator;
+        }, 0);
+        this.productForm.patchValue({"totalValue": tValue});
+        this.productForm.patchValue({"totalTaxAmt": tTaxAmt});
+        this.productForm.patchValue({"totalGross": tGross});
+      });
     });
     this.productForm.get('billNo').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
       this.invoiceInfo.getInvoiceInfo({"invoiceNo": e}).subscribe((info)=>{
