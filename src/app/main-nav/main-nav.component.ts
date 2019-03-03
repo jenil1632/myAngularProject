@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Invoice_submit } from './../services/invoice_submit.service';
 
+declare var printInvoice: any;
+
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
@@ -22,5 +24,9 @@ export class MainNavComponent {
   submitForm()
   {
     this.invoice_submit.setState(true);
+  }
+
+  createPrintInvoice(){
+    new printInvoice();
   }
 }
