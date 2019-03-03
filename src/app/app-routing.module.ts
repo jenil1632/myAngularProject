@@ -5,8 +5,9 @@ import { NewCustomerEntryComponent} from './dashboard/new-customer-entry/new-cus
 import { NewProductEntryComponent} from './dashboard/new-product-entry/new-product-entry.component';
 import { InvoiceDeleteComponent} from './dashboard/invoice-delete/invoice-delete.component';
 import { InvoiceEditComponent } from './dashboard/invoice-edit/invoice-edit.component';
+import { InvoiceViewComponent } from './dashboard/invoice-view/invoice-view.component';
 
-const routes: Routes = [{path: 'dataentry', component: DataentryComponent}, {path: 'newCustomer', component: NewCustomerEntryComponent}, {path: 'newProduct', component: NewProductEntryComponent}, {path: 'invoiceDelete', component: InvoiceDeleteComponent}, {path: 'invoiceEdit', component: InvoiceEditComponent}, {path: '**', redirectTo: '/dataentry', pathMatch: 'full'}];
+const routes: Routes = [{path: 'dataentry', component: DataentryComponent}, {path: 'newCustomer', component: NewCustomerEntryComponent}, {path: 'newProduct', component: NewProductEntryComponent}, {path: 'invoiceDelete', component: InvoiceDeleteComponent}, {path: 'invoiceEdit', component: InvoiceEditComponent}, {path: 'invoiceView', component: InvoiceViewComponent}, {path: '**', redirectTo: '/dataentry', pathMatch: 'full'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -28,6 +28,7 @@ import { Data_insert } from './services/dataInsert.service';
 import { InvoiceDeleteComponent } from './dashboard/invoice-delete/invoice-delete.component';
 import { PodateComponent } from './utils/podate/podate.component';
 import { InvoiceEditComponent } from './dashboard/invoice-edit/invoice-edit.component';
+import { InvoiceViewComponent } from './dashboard/invoice-view/invoice-view.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { InvoiceEditComponent } from './dashboard/invoice-edit/invoice-edit.comp
     NewProductEntryComponent,
     InvoiceDeleteComponent,
     PodateComponent,
-    InvoiceEditComponent
+    InvoiceEditComponent,
+    InvoiceViewComponent
   ],
   imports: [
     BrowserModule,

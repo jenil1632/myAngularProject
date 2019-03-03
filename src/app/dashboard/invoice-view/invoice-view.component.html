@@ -1,0 +1,250 @@
+<div>
+<span style="font-size: 12px; display: block; text-align: right; margin-top: 8px">TAX INVOICE FOR SUPPLY OF GOODS</span>
+</div>
+<div>
+<span style="font-size: 14px; display: block; text-align: center; padding: 8px 0; margin: 4px 0; border-top: 2px solid; border-bottom: 1px solid"><b>ISSUED U/SECTION 31(1) OF GST ACT , 2016</b></span>
+</div>
+<h2 style="text-align: center">RADIANT LIGHTS</h2>
+<p style="text-align:center; margin-bottom:4px"><i>DALLAS BUILDING SHOP NO 1, GYAN MANDIR ROAD, DADAR(WEST), MUMBAI-400028</i></p>
+<p style="text-align:center; margin-top:0"><i>PH: 022-24212401, MOBILE NO: 9004651205, EMAIL: radiantlights25@gmail.com</i></p>
+<div style="display: flex; justify-content: space-around">
+<span>GSTIN NO OF SUPPLIER: 27BPMPS2885F1ZA</span>
+<span>SUPPLIER PAN NO: BPMPS2885F</span>
+</div>
+<div style="display: flex; justify-content: space-around">
+<span>PLACE OF SUPPLY: MUMBAI</span>
+<span>STATE CODE: MAHARASHTRA</span>
+</div>
+<hr>
+<div style="display: flex; justify-content: center; margin-bottom: 8px">
+<span>INVOICE NO: </span><input type = "number"/>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
+<div class = "one-third">
+<span>BUYER'S NAME: </span>
+</div>
+<div class = "one-third middle">
+<span>Name goes here</span>
+</div>
+<div class = "one-third right">
+<span>DATE OF ISSUE: </span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
+<div class = "one-third">
+<span>BUYERS ADDRESS: </span>
+</div>
+<div class = "one-third middle">
+<span>address goes here</span>
+</div>
+<div class = "one-third right">
+<span>BUYERS TELL NO: </span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
+<div class = "one-third">
+<span>EMAIL ID: </span>
+</div>
+<div class = "one-third middle">
+<span>email goes here</span>
+</div>
+<div class = "one-third right">
+<span>PO NO: </span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
+<div class = "one-third">
+<span>CONTACT PERSON: </span>
+</div>
+<div class = "one-third middle">
+<span>name goes here</span>
+</div>
+<div class = "one-third right">
+<span>PAYMENT MODE:</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
+<div class = "one-third">
+<span>PLACE OF SUPPLY: </span>
+</div>
+<div class = "one-third middle">
+<span>place goes here</span>
+</div>
+<div class = "one-third right">
+<span>PO DATE: </span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
+<div class = "one-third">
+<span>STATE NAME: </span>
+</div>
+<div class = "one-third middle">
+<span>name goes here</span>
+</div>
+<div class = "one-third right">
+<span>STATE CODE: </span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
+<div class = "one-third">
+<span>GSTIN OF THE BUYER: </span>
+</div>
+<div class = "one-third middle">
+<span>gst goes here</span>
+</div>
+<div class = "one-third right">
+<span>E-WAY NO: </span>
+</div>
+</div>
+<table>
+  <colgroup>
+    <col style="width: 8%">
+    <col style="width: 300px">
+    <col style="width: 8%">
+    <col style="width: 8%">
+    <col style="width: 8%">
+    <col style="width: 12%">
+    <col style="width: 9%">
+    <col style="width: 10%">
+    <col style="width: 12%">
+  </colgroup>
+  <thead>
+  <tr>
+  <th>Sr No.</th>
+  <th>Description</th>
+  <th>HSN code</th>
+  <th>Qty</th>
+  <th>UNIT PRICE</th>
+  <th>GROSS VALUE</th>
+  <th colspan="2">GST</th>
+  <th>TOTAL VALUE</th>
+</tr>
+<tr>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th>RATE %</th>
+  <th>AMT</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor = "let product of products; let i = index;">
+  <td class = "srno">{{i+1}}</td>
+  <td class = "product"></td>
+  <td class = "qty"></td>
+  <td class = "mrp"></td>
+  <td class = "rate"></td>
+  <td class = "value"></td>
+  <td class = "taxrate"></td>
+  <td class = "taxamt"></td>
+  <td class = "gross"></td>
+</tr>
+</tbody>
+<tfoot style="background-color:#d3d3d3; font-weight: 700">
+  <tr>
+    <td colspan="5">TOTAL AMOUNT DUE</td>
+    <td class = "totalValue"></td>
+    <td></td>
+    <td class = "totalTaxAmt"></td>
+    <td class = "totalGross"></td>
+  </tr>
+</tfoot>
+</table>
+
+<div style="display:flex; justify-content: space-around; margin: 8px 0">
+<span>TOTAL AMOUNT IN WORDS: </span>
+<span>AMOUNT GOES HERE</span>
+</div>
+<table style="margin: 0 auto">
+  <colgroup>
+    <col style="width: 50px">
+    <col style="width: 75px">
+    <col style="width: 50px">
+    <col style="width: 50px">
+    <col style="width: 75px">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>GST RATE</th>
+      <th>TAXABLE AMT</th>
+      <th>SGST</th>
+      <th>CGST</th>
+      <th>TOTAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>12</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>TOTAL</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<h4>BANK DETAILS</h4>
+<div style="display:flex; justify-content: space-around">
+<div class = "one-third">
+<span>ACCOUNT NAME</span>
+</div>
+<div class = "one-third">
+<span>RADIAN LIGHTS</span>
+</div>
+<div class = "one-third">
+<span>FOR RADIANT LIGHTS</span>
+</div>
+</div>
+<div style="display:flex; justify-content: space-around">
+<div class = "one-third">
+<span>BANK NAME</span>
+</div>
+<div class = "one-third">
+<span>HDFC BANK</span>
+</div>
+<div class = "one-third"></div>
+</div>
+<div style="display:flex; justify-content: space-around">
+<div class = "one-third">
+<span>CURRENT ACCOUNT NO: </span>
+</div>
+<div class = "one-third">
+<span>50200016162580</span>
+</div>
+<div class = "one-third"></div>
+</div>
+<div style="display:flex; justify-content: space-around">
+<div class = "one-third">
+<span>BANK IFSC CODE: </span>
+</div>
+<div class = "one-third">
+<span>HDFC0001118</span>
+</div>
+<div class = "one-third">
+<span>PROPRIETOR</span>
+</div>
+</div>
