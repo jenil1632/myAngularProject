@@ -15,4 +15,16 @@ export class Invoice_info{
   public getBillAmt(invoiceNo): Observable<any>{
     return this.http.post<any>("billAmt", invoiceNo);
   }
+
+  public getCustomer(customerName): Observable<any>{
+    return this.http.post<any>("getCustomer", customerName);
+  }
+
+  public getHSN(productName): Observable<any>{
+    return this.http.post<any>("productHSN", productName);
+  }
+
+  public getAmountInWords(amt): Observable<any>{
+    return this.http.post<any>("inWords", amt);
+  }
 }

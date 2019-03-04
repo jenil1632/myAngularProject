@@ -18,17 +18,17 @@
 </div>
 <hr>
 <div style="display: flex; justify-content: center; margin-bottom: 8px">
-<span>INVOICE NO: </span><input type = "number"/>
+<span>INVOICE NO: </span><input type = "number" [formControl] = "billNo"/>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
 <div class = "one-third">
 <span>BUYER'S NAME: </span>
 </div>
 <div class = "one-third middle">
-<span>Name goes here</span>
+<span>{{customerName}}</span>
 </div>
 <div class = "one-third right">
-<span>DATE OF ISSUE: </span>
+<span>DATE OF ISSUE: {{invoiceDate}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -36,10 +36,10 @@
 <span>BUYERS ADDRESS: </span>
 </div>
 <div class = "one-third middle">
-<span>address goes here</span>
+<span>{{address}}</span>
 </div>
 <div class = "one-third right">
-<span>BUYERS TELL NO: </span>
+<span>BUYERS TELL NO: {{contactNo}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -47,10 +47,10 @@
 <span>EMAIL ID: </span>
 </div>
 <div class = "one-third middle">
-<span>email goes here</span>
+<span>{{email}}</span>
 </div>
 <div class = "one-third right">
-<span>PO NO: </span>
+<span>PO NO: {{poNo}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -58,10 +58,10 @@
 <span>CONTACT PERSON: </span>
 </div>
 <div class = "one-third middle">
-<span>name goes here</span>
+<span>{{contactName}}</span>
 </div>
 <div class = "one-third right">
-<span>PAYMENT MODE:</span>
+<span>PAYMENT MODE: {{paymentType}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -72,7 +72,7 @@
 <span>place goes here</span>
 </div>
 <div class = "one-third right">
-<span>PO DATE: </span>
+<span>PO DATE: {{poDate}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -91,10 +91,10 @@
 <span>GSTIN OF THE BUYER: </span>
 </div>
 <div class = "one-third middle">
-<span>gst goes here</span>
+<span>{{gstNo}}</span>
 </div>
 <div class = "one-third right">
-<span>E-WAY NO: </span>
+<span>E-WAY NO: {{ewayNo}}</span>
 </div>
 </div>
 <table>
@@ -135,30 +135,30 @@
 <tbody>
 <tr *ngFor = "let product of products; let i = index;">
   <td class = "srno">{{i+1}}</td>
-  <td class = "product"></td>
-  <td class = "qty"></td>
-  <td class = "mrp"></td>
-  <td class = "rate"></td>
-  <td class = "value"></td>
-  <td class = "taxrate"></td>
-  <td class = "taxamt"></td>
-  <td class = "gross"></td>
+  <td class = "product">{{product ? product.productName : emptyString}}</td>
+  <td class = "qty">{{product ? product.hsn : emptyString}}</td>
+  <td class = "mrp">{{product ? product.qty : emptyString}}</td>
+  <td class = "rate">{{product ? product.rate : emptyString}}</td>
+  <td class = "value">{{product ? product.taxAmt : emptyString}}</td>
+  <td class = "taxrate">{{product ? product.taxRate : emptyString}}</td>
+  <td class = "taxamt">{{product ? product.value : emptyString}}</td>
+  <td class = "gross">{{product ? product.gross : emptyString}}</td>
 </tr>
 </tbody>
 <tfoot style="background-color:#d3d3d3; font-weight: 700">
   <tr>
     <td colspan="5">TOTAL AMOUNT DUE</td>
-    <td class = "totalValue"></td>
+    <td class = "totalValue">{{totalTaxAmt}}</td>
     <td></td>
-    <td class = "totalTaxAmt"></td>
-    <td class = "totalGross"></td>
+    <td class = "totalTaxAmt">{{totalValue}}</td>
+    <td class = "totalGross">{{totalGross}}</td>
   </tr>
 </tfoot>
 </table>
 
 <div style="display:flex; justify-content: space-around; margin: 8px 0">
 <span>TOTAL AMOUNT IN WORDS: </span>
-<span>AMOUNT GOES HERE</span>
+<span>{{amountInWords}}</span>
 </div>
 <table style="margin: 0 auto">
   <colgroup>

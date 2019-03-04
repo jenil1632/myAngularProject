@@ -12,7 +12,6 @@ import { NameAutocompleteComponent, User } from './../../utils/name-autocomplete
 import { DatepickerComponent } from './../../utils/datepicker/datepicker.component';
 import { PodateComponent } from './../../utils/podate/podate.component';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { Bill } from './../../interfaces/billNo';
 import { Subscription } from 'rxjs';
 
 

@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const converter = require('number-to-words');
 
 const {Client} = require('pg');
 const connectionString = process.env.DATABASE_URL || 'postgres://postgres:admin@localhost:5432/Radiant';
@@ -129,6 +130,38 @@ let queryString = `SELECT * FROM datatable WHERE invoice_no = ${req.body.invoice
        });
 });
 
+app.post('/getCustomer', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();
+let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.customerName}';`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
+app.post('/productHSN', (req, res)=>{
+  const client = new Client({
+  connectionString: connectionString,
+})
+client.connect();console.log(req.body.productName);
+let queryString = `SELECT hsn FROM products WHERE product_name = '${req.body.productName}';`;
+       client.query(queryString, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
 app.post('/billAmt', (req, res)=>{
   const client = new Client({
   connectionString: connectionString,
@@ -233,6 +266,10 @@ let queryString = `DELETE FROM datatable WHERE invoice_no = ${req.params.invoice
          }
          res.status(200).send({"message": "success"});
        });
+});
+
+app.post('/inWords', (req, res)=>{
+  res.send({"amt": converter.toWords(req.body.amt)});
 });
 
 
