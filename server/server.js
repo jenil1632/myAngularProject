@@ -87,7 +87,7 @@ app.post('/insertCustomer', (req, res)=>{
   connectionString: connectionString,
 })
 client.connect();
-let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name) VALUES('${req.body.customerName}', '${req.body.address}', '${req.body.gstNo}', '${req.body.contactNo}', '${req.body.email}', '${req.body.contactPerson}');`;
+let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name,state) VALUES('${req.body.customerName}', '${req.body.address}', '${req.body.gstNo}', '${req.body.contactNo}', '${req.body.email}', '${req.body.contactPerson}', ${req.body.state});`;
        client.query(queryString, (err, result)=>{
          if(err)
          {
