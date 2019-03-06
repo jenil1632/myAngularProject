@@ -22,6 +22,10 @@ export class NewProductEntryComponent implements OnInit {
   }
 
   onSubmit(){
+    if(this.productForm.invalid)
+    {
+      return;
+    }
     this.data_insert.insertProduct(this.productForm).subscribe(function(res){
       if(res.message=='success')
       {

@@ -47,6 +47,10 @@ export class InvoiceDeleteComponent implements OnInit {
 }
 
 onSubmit(){
+  if(this.invoiceDeleteForm.invalid)
+  {
+    return;
+  }
   this.datadelete.deleteInvoice(this.invoiceDeleteForm.get('invoiceNo').value).subscribe(function(res){
     if(res.message=='success')
     {

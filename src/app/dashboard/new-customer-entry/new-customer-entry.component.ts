@@ -71,6 +71,10 @@ export class NewCustomerEntryComponent implements OnInit {
   }
 
   onSubmit(){
+    if(this.customerForm.invalid)
+    {
+      return;
+    }
     this.data_insert.insertCustomer(this.customerForm.value).subscribe(function(res){
       if(res.message=='success')
       {

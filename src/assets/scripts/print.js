@@ -45,8 +45,9 @@ th{
   text-align: right;
 }
 </style>`);
+let inp = document.getElementById("billNo");
+inp.setAttribute("value", inp.value);
 WinPrint.document.write(prtContent.innerHTML);
-console.log(window.location.pathname);
 WinPrint.document.close();
 WinPrint.focus();
 WinPrint.print();
