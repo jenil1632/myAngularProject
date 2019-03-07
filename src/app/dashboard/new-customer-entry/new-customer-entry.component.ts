@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Data_insert } from './../../services/dataInsert.service';
-
 
 export interface State {
   value: number;
@@ -62,8 +61,8 @@ export class NewCustomerEntryComponent implements OnInit {
     this.customerForm = new FormGroup({
       'customerName': new FormControl(null, Validators.required),
       'address': new FormControl(null),
-      'gstNo': new FormControl(null, Validators.required),
-      'contactNo': new FormControl(null, Validators.required),
+      'gstNo': new FormControl(null, [Validators.required, this.ValidateGSTNO.bind(this)]),
+      'contactNo': new FormControl(null, [Validators.required, this.ValidateContactNO.bind(this)]),
       'email': new FormControl(null),
       'contactPerson': new FormControl(null),
       'state': new FormControl(null)
@@ -86,5 +85,28 @@ export class NewCustomerEntryComponent implements OnInit {
       }
     });
   }
+
+  ValidateGSTNO(control: FormControl) {
+    if(control.value!=null)
+    {
+    if (control.value.length != 16 || control.value != 'URD'){
+      return { validGSTNO: true };
+    }
+    return null;
+  }
+    return null;
+  }
+
+  ValidateContactNO(control: FormControl) {
+    if(control.value!=null)
+    {
+    if (control.value.length != 10 || control.value.length != 8){
+      return { validContactNO: true };
+    }
+    return null;
+  }
+    return null;
+  }
+
 
 }

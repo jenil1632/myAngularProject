@@ -17,7 +17,7 @@ export class NewProductEntryComponent implements OnInit {
     this.productForm = new FormGroup({
       productName: new FormControl(null, Validators.required),
       rate: new FormControl(null, Validators.required),
-      hsn: new FormControl(null)
+      hsn: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(4)])
     });
   }
 
