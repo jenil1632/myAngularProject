@@ -109,10 +109,10 @@ taxable28: number = 0;
         if(info[0].po_date!=null)
         {
           let tmpPoDate = new Date(info[0].po_date);
-        this.poDate = `${tmpPoDate.getDate()}/${tmpPoDate.getMonth()}/${tmpPoDate.getFullYear()}`;
+        this.poDate = `${tmpPoDate.getDate()}/${tmpPoDate.getMonth()+1}/${tmpPoDate.getFullYear()}`;
       }
         let tmpDate = new Date(info[0].invoice_date);
-        this.invoiceDate =  `${tmpDate.getDate()}/${tmpDate.getMonth()}/${tmpDate.getFullYear()}`;
+        this.invoiceDate =  `${tmpDate.getDate()}/${tmpDate.getMonth()+1}/${tmpDate.getFullYear()}`;
         for(let i=0; i<info.length; i++)
         {
           let product: BillProduct = {

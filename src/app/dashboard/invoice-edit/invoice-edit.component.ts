@@ -13,6 +13,7 @@ import { DatepickerComponent } from './../../utils/datepicker/datepicker.compone
 import { PodateComponent } from './../../utils/podate/podate.component';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(NameAutocompleteComponent) nChild: NameAutocompleteComponent;
   @ViewChild(DatepickerComponent) dChild: DatepickerComponent;
   @ViewChild(PodateComponent) pChild: PodateComponent;
-  constructor(private product_list: Product_info, private bill_no: Bill_no, private invoice_submit: Invoice_submit, private data_insert: Data_insert, private invoiceInfo: Invoice_info) {
+  constructor(private product_list: Product_info, private bill_no: Bill_no, private invoice_submit: Invoice_submit, private data_insert: Data_insert, private invoiceInfo: Invoice_info, private router: Router) {
     this.purchases = new Array(15);
     this.totalProducts = 0;
     this.bill_no.getBillNo().subscribe(res => this.bill = res[0].invoice_no);
@@ -48,12 +49,12 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
           if(s.message=='success')
           {
             alert('Invoice entered successfully');
-            this.productForm.reset();
           }
           else{
             alert('Error inserting invoice');
           }
         });
+        this.router.navigate(['/dataentry']);
       }
     });
    }
@@ -76,13 +77,13 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
     for(let j=0;j<15;j++)
     {
       this.someArray.push(new FormGroup({
-        'qty': new FormControl(null, Validators.required),
-        'mrp': new FormControl(null, Validators.required),
-        'rate': new FormControl(null, Validators.required),
-        'taxRate': new FormControl({value: null, disabled: true}, Validators.required),
-        'taxAmt': new FormControl({value: null, disabled: true}, Validators.required),
-        'value': new FormControl({value: null, disabled: true}, Validators.required),
-        'gross': new FormControl({value: null, disabled: true}, Validators.required)
+        'qty': new FormControl(null),
+        'mrp': new FormControl(null),
+        'rate': new FormControl(null),
+        'taxRate': new FormControl({value: null, disabled: true}),
+        'taxAmt': new FormControl({value: null, disabled: true}),
+        'value': new FormControl({value: null, disabled: true}),
+        'gross': new FormControl({value: null, disabled: true})
       }));
     }
     this.product_list.getProducts().subscribe(res => this.pdts = res);
@@ -103,9 +104,17 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
           if(taxRate)
           {
             control.patchValue({"taxRate": taxRate.rate});
+            control.get('qty').setValidators([Validators.required]);
+            control.get('qty').updateValueAndValidity();
+            control.get('rate').setValidators([Validators.required]);
+            control.get('rate').updateValueAndValidity();
           }
           else{
             control.patchValue({"taxRate": null});
+            control.get('qty').clearValidators();
+            control.get('qty').updateValueAndValidity();
+            control.get('rate').clearValidators();
+            control.get('rate').updateValueAndValidity();
           }
       });
       control.get('qty').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
@@ -168,6 +177,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.someArray.at(i).get('qty').setValue(info[i].qty);
         this.someArray.at(i).get('mrp').setValue(info[i].mrp);
         this.someArray.at(i).get('rate').setValue(info[i].unit_price);
+        this.someArray.at(i).get('taxRate').setValue(info[i].tax_rate);
        }
       });
     });
