@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Invoice_info } from './../../services/invoice_info.service';
 import { Data_delete } from './../../services/dataDelete.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-delete',
@@ -13,7 +14,7 @@ import { Data_delete } from './../../services/dataDelete.service';
 export class InvoiceDeleteComponent implements OnInit {
 
   invoiceDeleteForm: FormGroup;
-  constructor(private invoiceinfo: Invoice_info, private datadelete: Data_delete) { }
+  constructor(private invoiceinfo: Invoice_info, private datadelete: Data_delete, private router: Router) { }
 
   ngOnInit() {
     this.invoiceDeleteForm = new FormGroup({
@@ -55,6 +56,7 @@ onSubmit(){
     if(res.message=='success')
     {
       alert('Invoice deleted successfully');
+      this.router.navigate(['/dataentry']);
     }
     else{
       alert('Error deleting data');

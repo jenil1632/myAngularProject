@@ -29,12 +29,14 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   bill: number;
   subscription: Subscription;
   productForm: FormGroup;
+  toggleTaxRate: boolean;
   @ViewChildren(ProductAutocompleteComponent) child: QueryList<ProductAutocompleteComponent>;
   @ViewChild(NameAutocompleteComponent) nChild: NameAutocompleteComponent;
   @ViewChild(DatepickerComponent) dChild: DatepickerComponent;
   @ViewChild(PodateComponent) pChild: PodateComponent;
   constructor(private product_list: Product_info, private bill_no: Bill_no, private invoice_submit: Invoice_submit, private data_insert: Data_insert, private invoiceInfo: Invoice_info, private router: Router) {
     this.purchases = new Array(15);
+    this.toggleTaxRate = false;
     this.totalProducts = 0;
     this.bill_no.getBillNo().subscribe(res => this.bill = res[0].invoice_no);
     this.subscription = this.invoice_submit.getState().subscribe(res =>{
@@ -100,6 +102,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
       arr[j].productName.setParent(<FormGroup>control);
       j++;
       control.get('childForm').valueChanges.pipe(distinctUntilChanged()).subscribe(()=>{
+        if(this.toggleTaxRate == false){
           let taxRate = this.getTaxRate(control.get('childForm').value.product_name);
           if(taxRate)
           {
@@ -116,6 +119,8 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
             control.get('rate').clearValidators();
             control.get('rate').updateValueAndValidity();
           }
+        }
+        this.toggleTaxRate = false;
       });
       control.get('qty').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
         control.patchValue({"value": e*control.get('rate').value});
@@ -173,6 +178,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
        {
          let pn = arr[i].options.find(prod=> prod.product_name === info[i].product_des);
          //console.log(this.someArray.at(i).get('childForm'));
+        this.toggleTaxRate = true;
         this.someArray.at(i).get('childForm').setValue(pn);
         this.someArray.at(i).get('qty').setValue(info[i].qty);
         this.someArray.at(i).get('mrp').setValue(info[i].mrp);
