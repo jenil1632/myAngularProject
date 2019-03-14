@@ -7,10 +7,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng-build --aot -prod",
+    "start": "node server/server.js"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~7.2.1",
     "@angular/animations": "~7.2.0",
     "@angular/cdk": "~7.2.1",
     "@angular/common": "~7.2.0",
@@ -33,7 +36,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.12.0",
-    "@angular/cli": "~7.2.1",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
     "@types/node": "~8.9.4",
@@ -51,5 +53,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"
+  },
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.6.0"
   }
 }
