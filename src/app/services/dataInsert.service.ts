@@ -10,11 +10,11 @@ export class Data_insert{
   constructor(private http: HttpClient){ }
 
   public insertCustomer(formGroup: FormGroup): Observable<any>{
-    return this.http.post<any>("insertCustomer", formGroup);
+    return this.http.post<any>("insertCustomer", formGroup.value);
   }
 
   public insertProduct(formGroup: FormGroup): Observable<any>{
-    return this.http.post<any>("insertProduct", formGroup);
+    return this.http.post<any>("insertProduct", formGroup.value);
   }
 
   public insertInvoice(formGroup: FormGroup): Observable<any>{

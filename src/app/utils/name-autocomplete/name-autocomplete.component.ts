@@ -16,7 +16,8 @@ export interface User {
   encapsulation: ViewEncapsulation.None
 })
 export class NameAutocompleteComponent implements OnInit {
-  customerName = new FormControl(null, Validators.required);
+  //customerName = new FormControl(null, Validators.required);
+  customerName = new FormControl(null);
   options: User[] = [];
   filteredOptions: Observable<User[]>;
 

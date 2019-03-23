@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Data_insert } from './../../services/dataInsert.service';
+import { Router } from '@angular/router';
 
 export interface State {
   value: number;
@@ -55,7 +56,7 @@ export class NewCustomerEntryComponent implements OnInit {
   {value: 36, viewValue: 'Telangana'},
   {value: 37, viewValue: 'Andhra Pradesh (new)'}
 ];
-  constructor(public data_insert: Data_insert) { }
+  constructor(public data_insert: Data_insert, public router: Router) { }
 
   ngOnInit() {
     this.customerForm = new FormGroup({
@@ -69,7 +70,7 @@ export class NewCustomerEntryComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit(){console.log(this.customerForm);
     if(this.customerForm.invalid)
     {
       return;
@@ -78,11 +79,11 @@ export class NewCustomerEntryComponent implements OnInit {
       if(res.message=='success')
       {
         alert('Customer inserted successfully');
-        this.customerForm.reset();
       }
       else{
         alert('Error inserting data');
       }
+      this.router.navigate(['/dataentry']);
     });
   }
 
@@ -90,9 +91,9 @@ export class NewCustomerEntryComponent implements OnInit {
     if(control.value!=null)
     {
     if (control.value.length != 16 || control.value != 'URD'){
-      return { validGSTNO: true };
+      return null;
     }
-    return null;
+      return { validGSTNO: true };
   }
     return null;
   }
@@ -100,13 +101,14 @@ export class NewCustomerEntryComponent implements OnInit {
   ValidateContactNO(control: FormControl) {
     if(control.value!=null)
     {
-    if (control.value.length != 10 || control.value.length != 8){
-      return { validContactNO: true };
+    if(control.value.length == 10 || control.value.length == 8)
+    {
+      return null;
     }
-    return null;
+    else{
+      return { validContactNO: true };
+  }
   }
     return null;
   }
-
-
 }

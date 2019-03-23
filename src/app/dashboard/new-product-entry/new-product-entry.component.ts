@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Data_insert } from './../../services/dataInsert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-product-entry',
@@ -11,7 +12,7 @@ import { Data_insert } from './../../services/dataInsert.service';
 export class NewProductEntryComponent implements OnInit {
 
   productForm: FormGroup;
-  constructor(public data_insert: Data_insert) { }
+  constructor(public data_insert: Data_insert, public router: Router) { }
 
   ngOnInit() {
     this.productForm = new FormGroup({
@@ -30,11 +31,11 @@ export class NewProductEntryComponent implements OnInit {
       if(res.message=='success')
       {
         alert('Product inserted successfully');
-        this.productForm.reset();
       }
       else{
         alert('Error inserting Data');
       }
+      this.router.navigate(['/dataentry']);
     });
   }
 

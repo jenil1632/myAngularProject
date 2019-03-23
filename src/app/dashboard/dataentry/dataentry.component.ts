@@ -76,6 +76,10 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
       'totalGross': new FormControl({value: 0, disabled: true}),
       'products': new FormArray([])
     });
+    this.productForm.addControl('customerName', this.nChild.customerName);
+    this.productForm.get('customerName').setValidators([Validators.required]);
+    this.productForm.addControl('invoiceDate', this.dChild.invoiceDate);
+    this.productForm.get('invoiceDate').setValidators([Validators.required]);
     for(let j=0;j<15;j++)
     {
       this.someArray.push(new FormGroup({
@@ -92,8 +96,6 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(){
-    this.productForm.addControl('customerName', this.nChild.customerName);
-    this.productForm.addControl('invoiceDate', this.dChild.invoiceDate);
     this.productForm.addControl('poDate', this.pChild.poDate);
     let arr: ProductAutocompleteComponent[] = this.child.toArray();
     let j = 0;

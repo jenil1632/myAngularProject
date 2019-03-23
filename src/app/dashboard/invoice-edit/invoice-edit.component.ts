@@ -101,7 +101,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
       (<FormGroup>control).addControl('childForm', arr[j].productName);
       arr[j].productName.setParent(<FormGroup>control);
       j++;
-      control.get('childForm').valueChanges.pipe(distinctUntilChanged()).subscribe(()=>{
+      control.get('childForm').valueChanges.pipe(distinctUntilChanged()).subscribe(()=>{console.log(this.toggleTaxRate);
         if(this.toggleTaxRate == false){
           let taxRate = this.getTaxRate(control.get('childForm').value.product_name);
           if(taxRate)
@@ -180,10 +180,10 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
          //console.log(this.someArray.at(i).get('childForm'));
         this.toggleTaxRate = true;
         this.someArray.at(i).get('childForm').setValue(pn);
+        this.someArray.at(i).get('taxRate').setValue(info[i].tax_rate);
         this.someArray.at(i).get('qty').setValue(info[i].qty);
         this.someArray.at(i).get('mrp').setValue(info[i].mrp);
         this.someArray.at(i).get('rate').setValue(info[i].unit_price);
-        this.someArray.at(i).get('taxRate').setValue(info[i].tax_rate);
        }
       });
     });

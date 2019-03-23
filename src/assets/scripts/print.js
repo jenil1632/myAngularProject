@@ -36,14 +36,6 @@ th{
 .one-third span{
   display: block;
 }
-
-.middle span{
-  text-align: center;
-}
-
-.right span{
-  text-align: right;
-}
 </style>`);
 let inp = document.getElementById("billNo");
 inp.setAttribute("value", inp.value);
