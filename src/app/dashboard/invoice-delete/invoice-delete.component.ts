@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class InvoiceDeleteComponent implements OnInit {
 
   invoiceDeleteForm: FormGroup;
-  constructor(private invoiceinfo: Invoice_info, private datadelete: Data_delete, public router: Router) { }
+  constructor(private invoiceinfo: Invoice_info, private datadelete: Data_delete, private router: Router) { }
 
   ngOnInit() {
     this.invoiceDeleteForm = new FormGroup({
@@ -60,7 +60,7 @@ onSubmit(){
     else{
       alert('Error deleting data');
     }
-    this.router.navigate(['/dataentry']);
   });
+      this.router.navigate(['/dataentry']);
 }
 }

@@ -6,6 +6,10 @@ const converter = require('number-to-words');
 
 const {Client} = require('pg');
 const connectionString = process.env.DATABASE_URL || 'postgres://postgres:admin@localhost:5432/Radiant';
+const client = new Client({
+connectionString: connectionString,
+});
+client.connect();
 
 // Get our API routes
 //const api = require('./server/routes/api');
@@ -23,10 +27,6 @@ app.use(express.static(path.join(__dirname, '..', 'dist/myAngularProject')));
 //app.use('/api', api);
 
 app.get('/customerList', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
        client.query('SELECT DISTINCT cust_name FROM datatable', (err, result)=>{
          if(err)
          {
@@ -38,10 +38,6 @@ client.connect();
 });
 
 app.get('/productList', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
        client.query('SELECT product_name FROM products', (err, result)=>{
          if(err)
          {
@@ -53,10 +49,6 @@ client.connect();
 });
 
 app.get('/productInfo', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
        client.query('SELECT * FROM products', (err, result)=>{
          if(err)
          {
@@ -68,10 +60,6 @@ client.connect();
 });
 
 app.get('/lastBill', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
        client.query('SELECT invoice_no FROM datatable ORDER BY invoice_no DESC LIMIT 1', (err, result)=>{
          if(err)
          {
@@ -83,10 +71,6 @@ client.connect();
 });
 
 app.post('/insertCustomer', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name,state) VALUES('${req.body.customerName}', '${req.body.address}', '${req.body.gstNo}', '${req.body.contactNo}', '${req.body.email}', '${req.body.contactPerson}', ${req.body.state});`;
        client.query(queryString, (err, result)=>{
          if(err)
@@ -99,10 +83,6 @@ let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,ema
 });
 
 app.post('/insertProduct', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.body.productName}', '${req.body.rate}', '${req.body.hsn}');`;
        client.query(queryString, (err, result)=>{
          if(err)
@@ -115,10 +95,6 @@ let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.bo
 });
 
 app.post('/invoiceInfo', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let queryString = `SELECT * FROM datatable WHERE invoice_no = ${req.body.invoiceNo};`;
        client.query(queryString, (err, result)=>{
          if(err)
@@ -131,10 +107,6 @@ let queryString = `SELECT * FROM datatable WHERE invoice_no = ${req.body.invoice
 });
 
 app.post('/getCustomer', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.customerName}';`;
        client.query(queryString, (err, result)=>{
          if(err)
@@ -147,10 +119,6 @@ let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.custome
 });
 
 app.post('/productHSN', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();console.log(req.body.productName);
 let queryString = `SELECT hsn FROM products WHERE product_name = '${req.body.productName}';`;
        client.query(queryString, (err, result)=>{
          if(err)
@@ -163,10 +131,6 @@ let queryString = `SELECT hsn FROM products WHERE product_name = '${req.body.pro
 });
 
 app.post('/billAmt', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let queryString = `SELECT SUM(bill_value) FROM datatable WHERE invoice_no = ${req.body.invoiceNo} GROUP BY invoice_no;`;
        client.query(queryString, (err, result)=>{
          if(err)
@@ -179,10 +143,6 @@ let queryString = `SELECT SUM(bill_value) FROM datatable WHERE invoice_no = ${re
 });
 
 app.post('/insertInvoice', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let count = 97;
 for(let i=0; i<15;i++)
 {
@@ -216,10 +176,6 @@ res.status(200).send({"message": "success"});
 });
 
 app.post('/editInvoice', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let delString = `DELETE FROM datatable WHERE invoice_no = ${req.body.billNo};`;
        client.query(delString, (err, result)=>{
        });
@@ -256,10 +212,6 @@ res.status(200).send({"message": "success"});
 });
 
 app.delete('/deleteInvoice/:invoiceNo', (req, res)=>{
-  const client = new Client({
-  connectionString: connectionString,
-})
-client.connect();
 let queryString = `DELETE FROM datatable WHERE invoice_no = ${req.params.invoiceNo};`;
        client.query(queryString, (err, result)=>{
          if(err)
