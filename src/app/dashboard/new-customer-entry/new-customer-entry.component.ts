@@ -70,7 +70,7 @@ export class NewCustomerEntryComponent implements OnInit {
     });
   }
 
-  onSubmit(){console.log(this.customerForm);
+  onSubmit(){
     if(this.customerForm.invalid)
     {
       return;
@@ -83,14 +83,14 @@ export class NewCustomerEntryComponent implements OnInit {
       else{
         alert('Error inserting data');
       }
-      this.router.navigate(['/dataentry']);
     });
+          this.router.navigate(['/dataentry']);
   }
 
   ValidateGSTNO(control: FormControl) {
     if(control.value!=null)
     {
-    if (control.value.length != 16 || control.value != 'URD'){
+    if (control.value.length == 16 || control.value == 'URD'){
       return null;
     }
       return { validGSTNO: true };

@@ -35,8 +35,8 @@ export class NewProductEntryComponent implements OnInit {
       else{
         alert('Error inserting Data');
       }
-      this.router.navigate(['/dataentry']);
     });
+          this.router.navigate(['/dataentry']);
   }
 
 }
