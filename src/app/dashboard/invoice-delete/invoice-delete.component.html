@@ -16,3 +16,11 @@
       <a routerLink="/dataentry"><button mat-raised-button color="primary" class = "submitButton">Back</button></a>
         </div>
 </form>
+
+<div id = "confirmation">
+  <p style="text-align: center">Do you wish to delete the invoice</p>
+  <div class = "row" style="justify-content: center">
+    <button mat-raised-button color="warn" class = "submitButton" (click) = "deleteRequest()">Yes</button>
+    <button mat-raised-button color="primary" class = "submitButton" (click) = "hideConfirmation()">No</button>
+  </div>
+</div>

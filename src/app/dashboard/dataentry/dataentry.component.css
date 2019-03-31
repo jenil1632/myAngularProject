@@ -61,6 +61,10 @@ input[type=number]::-webkit-outer-spin-button {
      width: 300px;
    }
 
+   .mat-form-field-infix input{
+     text-transform: uppercase;
+   }
+
 }
 
 @media(max-width: 767px){

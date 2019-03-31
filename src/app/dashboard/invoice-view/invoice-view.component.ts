@@ -89,6 +89,7 @@ taxable28: number = 0;
         this.taxable12 = 0;
         this.taxable18 = 0;
         this.taxable28 = 0;
+        this.poDate = '';
         if(info.length!=0)
         {
         this.customerName = info[0].cust_name;

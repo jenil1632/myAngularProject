@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '..', 'dist/myAngularProject')));
 //app.use('/api', api);
 
 app.get('/customerList', (req, res)=>{
-       client.query('SELECT DISTINCT cust_name FROM datatable', (err, result)=>{
+       client.query('SELECT DISTINCT cust_name FROM customers', (err, result)=>{
          if(err)
          {
            console.log(err);

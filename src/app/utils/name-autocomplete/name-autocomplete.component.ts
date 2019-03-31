@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {Customer_list} from './../../services/customer_list.service';
@@ -32,7 +32,6 @@ export class NameAutocompleteComponent implements OnInit {
   }
 
   displayFn(user?: User): string | undefined {
-    //return user? user.cust_name : 'nola';
     return user ? user.cust_name : undefined;
   }
 

@@ -7,6 +7,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.errorClass{
+  color: red;
+}
+
 @media (max-width: 768px){
   .row .mat-form-field{
     display: block;

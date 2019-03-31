@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Data_insert } from './../../services/dataInsert.service';
 import { Router } from '@angular/router';
 
@@ -84,13 +84,14 @@ export class NewCustomerEntryComponent implements OnInit {
         alert('Error inserting data');
       }
     });
-          this.router.navigate(['/dataentry']);
+          //this.router.navigate(['/dataentry']);
+          this.customerForm.reset();
   }
 
   ValidateGSTNO(control: FormControl) {
     if(control.value!=null)
     {
-    if (control.value.length == 16 || control.value == 'URD'){
+    if (control.value.length == 15 || control.value == 'URD'){
       return null;
     }
       return { validGSTNO: true };

@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Invoice_info } from './../../services/invoice_info.service';
 import { Data_delete } from './../../services/dataDelete.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-delete',
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 export class InvoiceDeleteComponent implements OnInit {
 
   invoiceDeleteForm: FormGroup;
-  constructor(private invoiceinfo: Invoice_info, private datadelete: Data_delete, private router: Router) { }
+  constructor(private invoiceinfo: Invoice_info, private datadelete: Data_delete) { }
 
   ngOnInit() {
     this.invoiceDeleteForm = new FormGroup({
@@ -52,6 +51,13 @@ onSubmit(){
   {
     return;
   }
+  document.getElementById("confirmation").style.display = 'block';
+  let csstext = 'opacity: 0.4; pointer-events: none';
+  document.getElementById("invoice-delete-form").style.cssText = csstext;
+    //  this.router.navigate(['/dataentry']);
+}
+
+deleteRequest(){
   this.datadelete.deleteInvoice(this.invoiceDeleteForm.get('invoiceNo').value).subscribe(function(res){
     if(res.message=='success')
     {
@@ -61,6 +67,13 @@ onSubmit(){
       alert('Error deleting data');
     }
   });
-      this.router.navigate(['/dataentry']);
+  this.hideConfirmation();
+}
+
+hideConfirmation(){
+  document.getElementById("confirmation").style.display = 'none';
+  let csstext = 'opacity: 1; pointer-events: auto';
+  document.getElementById("invoice-delete-form").style.cssText = csstext;
+  this.invoiceDeleteForm.reset();
 }
 }

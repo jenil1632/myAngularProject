@@ -15,7 +15,7 @@ export interface Product {
   encapsulation: ViewEncapsulation.None
 })
 export class ProductAutocompleteComponent implements OnInit {
-  productName = new FormControl();
+  productName = new FormControl(null);
   options: Product[] = [];
   filteredOptions: Observable<Product[]>;
 
