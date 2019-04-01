@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class Invoice_info{
@@ -25,5 +26,13 @@ export class Invoice_info{
 
   public getAmountInWords(amt): Observable<any>{
     return this.http.post<any>("inWords", amt);
+  }
+
+  public getReports(formGroup: FormGroup): Observable<any>{
+    return this.http.post<any>("getReports", formGroup.getRawValue());
+  }
+
+  public getUniqueDates(formGroup: FormGroup): Observable<any>{
+    return this.http.post<any>("getUniqueDates", formGroup.getRawValue());
   }
 }

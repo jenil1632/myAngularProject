@@ -1,0 +1,49 @@
+
+.entry{
+  padding: 16px;
+  margin: 0 auto;
+}
+
+#submitButton{
+  display: block;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table{
+  width: 95%;
+  margin: 0 auto;
+  table-layout: fixed;
+}
+
+@media(min-width: 768px) {
+  .row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+   .entry{
+     width: 300px;
+   }
+
+   th{
+    padding: 10px;
+  }
+}
+
+@media(max-width: 767px){
+
+     table{
+       display: block;
+       overflow-x: auto;
+       white-space: nowrap;
+     }
+}

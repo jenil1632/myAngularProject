@@ -228,6 +228,54 @@ app.post('/inWords', (req, res)=>{
   res.send({"amt": converter.toWords(req.body.amt)});
 });
 
+app.post('/getReports', (req, res)=>{
+    let fDate = new Date(req.body.fromDate);
+    let day = fDate.getDate();
+    let month = fDate.getMonth()+1;
+    let year = fDate.getFullYear();
+    let fromDate = `${day}-${month}-${year}`;
+    let tDate = new Date(req.body.toDate);
+    day = tDate.getDate();
+    month = tDate.getMonth()+1;
+    year = tDate.getFullYear();
+    let toDate = `${day}-${month}-${year}`;
+    let queryString = `SELECT * FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY');`;
+    console.log(queryString);
+    client.query(queryString, (err, result)=>{
+      if(err)
+      {
+        console.log(err);
+        res.status(400).send(err);
+        return;
+      }
+      res.status(200).send(result.rows);
+    });
+});
+
+app.post('/getUniqueDates', (req, res)=>{
+    let fDate = new Date(req.body.fromDate);
+    let day = fDate.getDate();
+    let month = fDate.getMonth()+1;
+    let year = fDate.getFullYear();
+    let fromDate = `${day}-${month}-${year}`;
+    let tDate = new Date(req.body.toDate);
+    day = tDate.getDate();
+    month = tDate.getMonth()+1;
+    year = tDate.getFullYear();
+    let toDate = `${day}-${month}-${year}`;
+    let queryString = `SELECT DISTINCT invoice_no FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY');`;
+    console.log(queryString);
+    client.query(queryString, (err, result)=>{
+      if(err)
+      {
+        console.log(err);
+        res.status(400).send(err);
+        return;
+      }
+      res.status(200).send(result.rows);
+    });
+});
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

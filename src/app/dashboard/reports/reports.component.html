@@ -1,0 +1,43 @@
+<form id = "reports-form" [formGroup]="reportsForm" (ngSubmit)="onSubmit()">
+  <div class = "row">
+    <div class="entry smallField"><app-podate></app-podate></div>
+      <div class="entry smallField"><app-podate></app-podate></div>
+    <button mat-raised-button color="accent" type="submit" id = "submitButton">Find</button>
+      </div>
+</form>
+<hr>
+<div *ngIf = "result">
+  <table>
+    <!-- <colgroup>
+      <col style="width: 8%">
+      <col style="width: 300px">
+      <col style="width: 8%">
+      <col style="width: 10%">
+      <col style="width: 10%">
+      <col style="width: 12%">
+      <col style="width: 9%">
+    </colgroup> -->
+    <thead>
+    <tr>
+    <th>Sr No.</th>
+    <th>Bill No.</th>
+    <th>Invoice Date</th>
+    <th>Customer Name</th>
+    <th>GST 18%</th>
+    <th>GST 12%</th>
+    <th>Total</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let resultRow of resultArray; let i = index;">
+    <td>{{i+1}}</td>
+    <td>{{resultRow.invoice_no}}</td>
+    <td>{{resultRow.invoice_date}}</td>
+    <td>{{resultRow.cust_name}}</td>
+    <td>{{resultRow.taxable18}}</td>
+    <td>{{resultRow.taxable12}}</td>
+    <td>{{resultRow.bill_value}}</td>
+  </tr>
+  </tbody>
+  </table>
+</div>
