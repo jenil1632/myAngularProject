@@ -59,6 +59,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
                   total = order.bill_value;
                   this.totalBill += order.bill_value;
                   firstBill = false;
+                }
                 if(order.tax_rate == 18)
                 {
                   tax18 += order.tax_value;
