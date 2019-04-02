@@ -14,6 +14,9 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   reportsForm: FormGroup;
   result: boolean = false;
   resultArray = [];
+  totalTax12 = 0;
+  totalTax18 = 0;
+  totalBill = 0;
   constructor(private invoice_info: Invoice_info) { }
 
   ngOnInit() {
@@ -30,6 +33,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(){
+    this.totalBill = 0;
+    this.totalTax12 = 0;
+    this.totalTax18 = 0;
+    this.resultArray = [];
+    this.result = false;
     if(this.reportsForm.invalid){
       return;
     }
@@ -42,18 +50,24 @@ export class ReportsComponent implements OnInit, AfterViewInit {
             let invDate = "";
             let cName = "";
             let total = 0;
+            let firstBill = true;
             res.forEach((order)=>{
               if(inv.invoice_no == order.invoice_no){
-                invDate = order.invoice_date;
-                cName = order.cust_name;
-                total = order.bill_value;
+                if(firstBill){
+                  invDate = order.invoice_date;
+                  cName = order.cust_name;
+                  total = order.bill_value;
+                  this.totalBill += order.bill_value;
+                  firstBill = false;
                 if(order.tax_rate == 18)
                 {
                   tax18 += order.tax_value;
+                  this.totalTax18 += order.tax_value;
                 }
                 else if(order.tax_rate == 12)
                 {
                   tax12 += order.tax_value;
+                  this.totalTax12 += order.tax_value;
                 }
               }
             });
