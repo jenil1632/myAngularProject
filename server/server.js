@@ -290,6 +290,43 @@ app.post('/checkGSTno', (req, res)=>{
     });
 });
 
+app.post('/getCustomerData', (req, res)=>{
+    let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.customerName}';`;
+    console.log(queryString);
+    client.query(queryString, (err, result)=>{
+      if(err)
+      {
+        console.log(err);
+        res.status(400).send(err);
+        return;
+      }
+      res.status(200).send(result.rows);
+    });
+});
+
+app.post('/productData', (req, res)=>{
+       client.query(`SELECT * FROM products WHERE product_name = '${req.body.product_name}'`, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send(result.rows);
+       });
+});
+
+app.post('/editProduct', (req, res)=>{
+       console.log(req);
+       client.query(`UPDATE products SET hsn = '${req.body.hsn}', rate = '${req.body.rate}' WHERE product_name = '${req.body.productName.product_name}'`, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send({"message": "success"});
+       });
+});
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

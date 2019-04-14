@@ -15,4 +15,8 @@ export class Customer_list{
   public checkGSTno(gstNo){
     return this.http.post("checkGSTno", {"gstNo": gstNo});
   }
+
+  public getCustomerData(customerName){
+    return this.http.post("getCustomerData", {"customerName": customerName});
+  }
 }

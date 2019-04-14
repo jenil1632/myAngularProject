@@ -1,0 +1,47 @@
+
+.entry1{
+  padding: 16px;
+  margin: 0 auto;
+}
+
+input{
+  text-align: center;
+  background: #fafafa;
+  border: 0;
+  outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#submitButton{
+  display: block;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.edit .mat-form-field-wrapper{
+  border-bottom: 1px solid grey;
+  padding-bottom: 8px !important;
+}
+
+@media(min-width: 768px) {
+  .row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+   .entry1{
+     width: 300px;
+   }
+
+   #new-product-form .mat-form-field-infix{
+     width: 300px;
+   }
+
+}

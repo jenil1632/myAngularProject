@@ -30,6 +30,7 @@ import { PodateComponent } from './utils/podate/podate.component';
 import { InvoiceEditComponent } from './dashboard/invoice-edit/invoice-edit.component';
 import { InvoiceViewComponent } from './dashboard/invoice-view/invoice-view.component';
 import { ReportsComponent } from './dashboard/reports/reports.component';
+import { ProductEditComponent } from './dashboard/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ReportsComponent } from './dashboard/reports/reports.component';
     PodateComponent,
     InvoiceEditComponent,
     InvoiceViewComponent,
-    ReportsComponent
+    ReportsComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,

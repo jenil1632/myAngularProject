@@ -11,4 +11,8 @@ export class Product_info{
   public getProducts(): Observable<Pdt[]>{
     return this.http.get<Pdt[]>("productInfo");
   }
+
+  public getProductData(productName){
+    return this.http.post("productData", productName);
+  }
 }
