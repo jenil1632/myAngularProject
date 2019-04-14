@@ -26,6 +26,7 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
   purchases: PurchaseEntry[];
   pdts: Pdt[];
   bill: number;
+  noOfProducts: number = 0;
   subscription: Subscription;
   productForm: FormGroup;
   customerList: User[];
@@ -61,7 +62,15 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
                   return;
                 }
               }
+              else{
+                this.noOfProducts++;
+              }
             });
+            if(this.noOfProducts==15){
+              this.noOfProducts = 0;
+              alert("Please enter product name");
+              return;
+            }
             if(this.exitLoop == true)
             {
               this.exitLoop = false;
