@@ -25,6 +25,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   purchases: PurchaseEntry[];
   pdts: Pdt[];
+  noOfProducts: number = 0;
   subscription: Subscription;
   productForm: FormGroup;
   toggleTaxRate: boolean;
@@ -62,7 +63,15 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
                   return;
                 }
               }
+              else{
+                this.noOfProducts++;
+              }
             });
+            if(this.noOfProducts==15){
+              this.noOfProducts = 0;
+              alert("Please enter product name");
+              return;
+            }
             if(this.exitLoop == true)
             {
               this.exitLoop = false;

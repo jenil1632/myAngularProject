@@ -26,7 +26,11 @@ export class InvoiceDeleteComponent implements OnInit {
       this.invoiceinfo.getInvoiceInfo({"invoiceNo": e}).subscribe((info)=>{
         if(info.length!=0)
         {
-          this.invoiceDeleteForm.patchValue({'invoiceDate': (info[0].invoice_date).slice(0, 10)});
+          let day = (info[0].invoice_date).slice(8, 10);
+          let month = (info[0].invoice_date).slice(5, 7);
+          let year = (info[0].invoice_date).slice(0, 4);
+          let fullDate = `${day}-${month}-${year}`;
+          this.invoiceDeleteForm.patchValue({'invoiceDate': fullDate});
           this.invoiceDeleteForm.patchValue({'customerName': info[0].cust_name});
         }
         else{
