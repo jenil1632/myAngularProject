@@ -17,6 +17,6 @@ export class Customer_list{
   }
 
   public getCustomerData(customerName){
-    return this.http.post("getCustomerData", {"customerName": customerName});
+    return this.http.post("getCustomerData", customerName);
   }
 }

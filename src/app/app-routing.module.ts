@@ -8,8 +8,9 @@ import { InvoiceEditComponent } from './dashboard/invoice-edit/invoice-edit.comp
 import { InvoiceViewComponent } from './dashboard/invoice-view/invoice-view.component';
 import { ReportsComponent } from './dashboard/reports/reports.component';
 import { ProductEditComponent } from './dashboard/product-edit/product-edit.component';
+import { CustomerEditComponent } from './dashboard/customer-edit/customer-edit.component';
 
-const routes: Routes = [{path: 'dataentry', component: DataentryComponent, runGuardsAndResolvers: 'always'}, {path: 'newCustomer', component: NewCustomerEntryComponent}, {path: 'newProduct', component: NewProductEntryComponent}, {path: 'invoiceDelete', component: InvoiceDeleteComponent}, {path: 'invoiceEdit', component: InvoiceEditComponent}, {path: 'invoiceView', component: InvoiceViewComponent}, {path: 'reports', component: ReportsComponent}, {path: 'productEdit', component: ProductEditComponent}, {path: '**', redirectTo: '/dataentry', pathMatch: 'full'}];
+const routes: Routes = [{path: 'dataentry', component: DataentryComponent, runGuardsAndResolvers: 'always'}, {path: 'newCustomer', component: NewCustomerEntryComponent}, {path: 'newProduct', component: NewProductEntryComponent}, {path: 'invoiceDelete', component: InvoiceDeleteComponent}, {path: 'invoiceEdit', component: InvoiceEditComponent}, {path: 'invoiceView', component: InvoiceViewComponent}, {path: 'reports', component: ReportsComponent}, {path: 'productEdit', component: ProductEditComponent}, {path: 'customerEdit', component: CustomerEditComponent}, {path: '**', redirectTo: '/dataentry', pathMatch: 'full'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],

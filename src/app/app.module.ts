@@ -31,6 +31,7 @@ import { InvoiceEditComponent } from './dashboard/invoice-edit/invoice-edit.comp
 import { InvoiceViewComponent } from './dashboard/invoice-view/invoice-view.component';
 import { ReportsComponent } from './dashboard/reports/reports.component';
 import { ProductEditComponent } from './dashboard/product-edit/product-edit.component';
+import { CustomerEditComponent } from './dashboard/customer-edit/customer-edit.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ProductEditComponent } from './dashboard/product-edit/product-edit.comp
     InvoiceEditComponent,
     InvoiceViewComponent,
     ReportsComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    CustomerEditComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+
+.entry1{
+  padding: 16px;
+  margin: 0 auto;
+}
+
+input{
+  text-align: center;
+  background: #fafafa;
+  border: 0;
+  outline: none;
+}
+
+#submitButton{
+  display: block;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media(min-width: 768px) {
+  .row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+   .entry1{
+     width: 300px;
+   }
+
+   #invoice-delete-form .mat-form-field-infix{
+     width: 300px;
+   }
+
+}

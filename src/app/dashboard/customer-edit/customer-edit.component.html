@@ -1,0 +1,33 @@
+<form id = "new-customer-form" (ngSubmit)="onSubmit()" [formGroup] = "customerForm">
+  <div class = "row">
+  <div class="entry1"><app-name-autocomplete></app-name-autocomplete></div>
+    <div class="entry1"><mat-form-field class="example-full-width">
+        <input matInput placeholder="GST No." formControlName = "gstNo">
+      <mat-error *ngIf = "customerForm.get('gstNo').invalid">GST No. must be of 15 digits</mat-error>
+    <mat-error *ngIf = "!uniqueGST">Customer with GST No. already registered</mat-error></mat-form-field>
+      </div>
+  </div>
+    <div class = "row">
+      <div class="entry1"><mat-form-field class="example-full-width">
+          <input matInput placeholder="Name of Contact Person" formControlName = "contactPerson"></mat-form-field></div>
+          <div class="entry1"><mat-form-field class="example-full-width">
+              <input matInput placeholder="Contact No." required formControlName = "contactNo"></mat-form-field></div>
+            </div>
+    <div class = "row">
+      <div class="entry1"><mat-form-field class="example-full-width">
+          <input matInput placeholder="Address" formControlName = "address"></mat-form-field></div>
+          <div class="entry1"><mat-form-field>
+  <mat-select placeholder="State" formControlName = "state">
+    <mat-option *ngFor="let state of states" [value]="state.value">
+      {{state.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field></div>
+        </div>
+        <div class ="row">
+          <div class="entry1"><mat-form-field class="example-full-width">
+              <input matInput placeholder="Email" formControlName = "email"></mat-form-field></div>
+              <div class="entry1"></div>
+        </div>
+        <button mat-raised-button color="accent" type="submit" id = "submitButton" >Save</button>
+</form>

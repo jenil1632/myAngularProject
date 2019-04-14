@@ -291,7 +291,7 @@ app.post('/checkGSTno', (req, res)=>{
 });
 
 app.post('/getCustomerData', (req, res)=>{
-    let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.customerName}';`;
+    let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.cust_name}';`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)
@@ -318,6 +318,17 @@ app.post('/productData', (req, res)=>{
 app.post('/editProduct', (req, res)=>{
        console.log(req);
        client.query(`UPDATE products SET hsn = '${req.body.hsn}', rate = '${req.body.rate}' WHERE product_name = '${req.body.productName.product_name}'`, (err, result)=>{
+         if(err)
+         {
+           console.log(err);
+           res.status(400).send(err);
+         }
+         res.status(200).send({"message": "success"});
+       });
+});
+
+app.post('/editCustomer', (req, res)=>{
+       client.query(`UPDATE customers SET gst_no = '${req.body.gstNo}', address = '${req.body.address}', telephone = '${req.body.contactNo}', email = '${req.body.email}', contact_name = '${req.body.contactPerson}', state = '${req.body.state}' WHERE cust_name = '${req.body.customerName.cust_name}'`, (err, result)=>{
          if(err)
          {
            console.log(err);

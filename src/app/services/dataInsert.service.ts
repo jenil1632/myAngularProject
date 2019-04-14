@@ -28,4 +28,8 @@ export class Data_insert{
   public editProduct(formGroup: FormGroup): Observable<any>{
     return this.http.post<any>("editProduct", formGroup.getRawValue());
   }
+
+  public editCustomer(formGroup: FormGroup): Observable<any>{
+    return this.http.post<any>("editCustomer", formGroup.getRawValue());
+  }
 }
