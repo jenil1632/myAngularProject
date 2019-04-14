@@ -276,6 +276,20 @@ app.post('/getUniqueDates', (req, res)=>{
     });
 });
 
+app.post('/checkGSTno', (req, res)=>{
+    let queryString = `SELECT cust_name FROM customers WHERE gst_no = '${req.body.gstNo}';`;
+    console.log(queryString);
+    client.query(queryString, (err, result)=>{
+      if(err)
+      {
+        console.log(err);
+        res.status(400).send(err);
+        return;
+      }
+      res.status(200).send(result.rows);
+    });
+});
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

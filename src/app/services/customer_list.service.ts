@@ -11,4 +11,8 @@ export class Customer_list{
   public getCustomers(): Observable<User[]>{
     return this.http.get<User[]>("customerList");
   }
+
+  public checkGSTno(gstNo){
+    return this.http.post("checkGSTno", {"gstNo": gstNo});
+  }
 }

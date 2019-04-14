@@ -1,9 +1,11 @@
 <form id = "new-customer-form" (ngSubmit)="onSubmit()" [formGroup] = "customerForm">
   <div class = "row">
   <div class="entry1"><mat-form-field class="example-full-width">
-    <input matInput placeholder="Name" required formControlName = "customerName"></mat-form-field></div>
+    <input matInput placeholder="Name" required formControlName = "customerName">
+  <mat-error *ngIf = "!uniqueGST">Customer with GST No. already registered</mat-error></mat-form-field></div>
     <div class="entry1"><mat-form-field class="example-full-width">
-        <input matInput placeholder="GST No." formControlName = "gstNo"></mat-form-field>
+        <input matInput placeholder="GST No." formControlName = "gstNo">
+      <mat-error *ngIf = "customerForm.get('gstNo').invalid">GST No. must be of 15 digits</mat-error></mat-form-field>
       </div>
   </div>
     <div class = "row">

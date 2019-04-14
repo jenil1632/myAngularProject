@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Data_insert } from './../../services/dataInsert.service';
+import { Customer_list } from './../../services/customer_list.service';
 import { Router } from '@angular/router';
 
 export interface State {
@@ -17,6 +18,7 @@ export interface State {
 export class NewCustomerEntryComponent implements OnInit {
 
   customerForm: FormGroup;
+  uniqueGST: boolean = true;
   states: State[] = [
   {value: 1, viewValue: 'Jammu and Kashmir'},
   {value: 2, viewValue: 'Himachal Pradesh'},
@@ -56,7 +58,7 @@ export class NewCustomerEntryComponent implements OnInit {
   {value: 36, viewValue: 'Telangana'},
   {value: 37, viewValue: 'Andhra Pradesh (new)'}
 ];
-  constructor(public data_insert: Data_insert, public router: Router) { }
+  constructor(public data_insert: Data_insert, public router: Router, public customer_list: Customer_list) { }
 
   ngOnInit() {
     this.customerForm = new FormGroup({
@@ -66,7 +68,7 @@ export class NewCustomerEntryComponent implements OnInit {
       'contactNo': new FormControl(null, [Validators.required, this.ValidateContactNO.bind(this)]),
       'email': new FormControl(null),
       'contactPerson': new FormControl(null),
-      'state': new FormControl(null)
+      'state': new FormControl(null, Validators.required)
     });
   }
 
@@ -75,17 +77,23 @@ export class NewCustomerEntryComponent implements OnInit {
     {
       return;
     }
-    this.data_insert.insertCustomer(this.customerForm.value).subscribe(function(res){
-      if(res.message=='success')
-      {
-        alert('Customer inserted successfully');
+    this.customer_list.checkGSTno(this.customerForm.get('gstNo').value).subscribe((res: []) =>{
+      if(res.length!=0){
+        this.uniqueGST = false;
+        return;
       }
-      else{
-        alert('Error inserting data');
-      }
+      this.data_insert.insertCustomer(this.customerForm.value).subscribe(function(res){
+        if(res.message=='success')
+        {
+          alert('Customer inserted successfully');
+        }
+        else{
+          alert('Error inserting data');
+        }
+      });
+      this.uniqueGST = true;
+      this.customerForm.reset();
     });
-          //this.router.navigate(['/dataentry']);
-          this.customerForm.reset();
   }
 
   ValidateGSTNO(control: FormControl) {
