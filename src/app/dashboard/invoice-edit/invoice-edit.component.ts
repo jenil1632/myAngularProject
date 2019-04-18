@@ -44,12 +44,12 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.purchases = new Array(15);
         this.toggleTaxRate = false;
         this.customer_list.getCustomers().subscribe(res =>{ this.customerList = res});
-        this.subscription = this.invoice_submit.getState().subscribe(res =>{
+        this.subscription = this.invoice_submit.getEditState().subscribe(res =>{
           if(res)
           {console.log('submission in progress');
             if(this.validateCustomerName(this.productForm.get('customerName')))
             {console.log('edit-customer');
-              this.invoice_submit.setState(false);
+              this.invoice_submit.setEditState(false);
               document.getElementById("customerName").classList.add("errorClass");
               return;
             }
@@ -58,7 +58,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
               {
                 if(this.validateProductName(control))
                 {console.log(control.value);
-                  this.invoice_submit.setState(false);
+                  this.invoice_submit.setEditState(false);
                   this.exitLoop = true;
                   alert("invalid product name(s)");
                   return;
@@ -80,7 +80,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
             }
             if(this.productForm.invalid)
             {
-              this.invoice_submit.setState(false);
+              this.invoice_submit.setEditState(false);
               return;
             }
             this.data_insert.editInvoice(this.productForm).subscribe(function(s){
@@ -251,7 +251,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(){
   this.subscription.unsubscribe();
-  this.invoice_submit.setState(false);
+  this.invoice_submit.setEditState(false);
   }
 
   public validateCustomerName(control: AbstractControl){
