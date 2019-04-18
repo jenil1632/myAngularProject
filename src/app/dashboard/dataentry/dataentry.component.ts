@@ -25,6 +25,7 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   purchases: PurchaseEntry[];
   pdts: Pdt[];
+  poDateString: string = "PO Date";
   bill: number;
   noOfProducts: number = 0;
   subscription: Subscription;

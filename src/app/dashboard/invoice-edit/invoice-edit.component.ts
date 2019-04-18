@@ -25,6 +25,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   purchases: PurchaseEntry[];
   pdts: Pdt[];
+  poDateString: string = "PO Date";
   noOfProducts: number = 0;
   subscription: Subscription;
   productForm: FormGroup;

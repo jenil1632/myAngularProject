@@ -23,7 +23,7 @@
 </mat-form-field></div>
   <div class="entry smallField"><mat-form-field class="example-full-width">
     <input matInput placeholder="PO No." formControlName = "poNo"></mat-form-field></div>
-    <div class="entry smallField"><app-podate></app-podate></div>
+    <div class="entry smallField"><app-podate [placeholderValue] = "poDateString"></app-podate></div>
 </div>
 
 <table formArrayName = "products">

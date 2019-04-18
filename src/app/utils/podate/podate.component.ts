@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormControl } from '@angular/forms';
 export class PodateComponent implements OnInit {
 
   poDate = new FormControl();
+  @Input() placeholderValue: string;
+  @Input() reqDate: boolean;
   constructor() { }
 
   ngOnInit() {

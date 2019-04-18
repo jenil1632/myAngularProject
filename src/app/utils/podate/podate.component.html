@@ -1,6 +1,6 @@
 <form>
 <mat-form-field class="example-full-width">
-  <input matInput [matDatepicker]="picker" placeholder="PO Date" [formControl] = "poDate">
+  <input matInput [matDatepicker]="picker" placeholder="{{placeholderValue}}" [formControl] = "poDate" [required] = "reqDate">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>

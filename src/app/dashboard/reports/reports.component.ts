@@ -10,13 +10,17 @@ import { Invoice_info } from './../../services/invoice_info.service';
 })
 export class ReportsComponent implements OnInit, AfterViewInit {
 
-  @ViewChildren(PodateComponent) dates: QueryList<PodateComponent>;
+  @ViewChildren(PodateComponent) date1: QueryList<PodateComponent>;
   reportsForm: FormGroup;
   result: boolean = false;
+  startDate: string = "Start Date";
+  endDate: string = "End Date";
+  requiredDate: boolean = true;
   resultArray = [];
   totalTax12 = 0;
   totalTax18 = 0;
   totalBill = 0;
+  value = 0;
   constructor(private invoice_info: Invoice_info) { }
 
   ngOnInit() {
@@ -25,11 +29,8 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-    let arr: PodateComponent[] = this.dates.toArray();
-    this.reportsForm.addControl('fromDate', arr[0].poDate);
-    this.reportsForm.get('fromDate').setValidators([Validators.required]);
-    this.reportsForm.addControl('toDate', arr[1].poDate);
-    this.reportsForm.get('toDate').setValidators([Validators.required]);
+    this.reportsForm.addControl('fromDate', this.date1.first.poDate);
+    this.reportsForm.addControl('toDate', this.date1.last.poDate);
   }
 
   onSubmit(){
@@ -38,9 +39,6 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     this.totalTax18 = 0;
     this.resultArray = [];
     this.result = false;
-    if(this.reportsForm.invalid){
-      return;
-    }
     this.invoice_info.getReports(this.reportsForm).subscribe(res=>{
       if(res.length>0){
         this.invoice_info.getUniqueDates(this.reportsForm).subscribe((invoices) =>{
@@ -51,8 +49,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
             let cName = "";
             let total = 0;
             let firstBill = true;
+            let t_value = 0;
             res.forEach((order)=>{
               if(inv.invoice_no == order.invoice_no){
+                this.value += order.t_value;
+                t_value += order.t_value;
                 if(firstBill){
                   invDate = order.invoice_date;
                   cName = order.cust_name;
@@ -74,7 +75,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
             });
             let tmpDate = new Date(invDate);
             let invoiceDate =  `${tmpDate.getDate()}/${tmpDate.getMonth()+1}/${tmpDate.getFullYear()}`;
-            this.resultArray.push({"invoice_no": inv.invoice_no, "invoice_date": invoiceDate, "cust_name": cName, "taxable18": tax18, "taxable12": tax12, "bill_value": total});
+            this.resultArray.push({"invoice_no": inv.invoice_no, "invoice_date": invoiceDate, "cust_name": cName, "taxable18": tax18, "taxable12": tax12, "bill_value": total, "taxable_value": t_value});
           });
         });
                   this.result = true;
