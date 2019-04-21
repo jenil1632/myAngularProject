@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation} from '@angular/core';
 import { NameAutocompleteComponent } from './../../utils/name-autocomplete/name-autocomplete.component';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Customer_list } from "./../../services/customer_list.service";
 import { Data_insert } from "./../../services/dataInsert.service";
@@ -20,7 +20,6 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
 
   @ViewChild(NameAutocompleteComponent) child: NameAutocompleteComponent;
   customerForm: FormGroup;
-  uniqueGST: boolean = true;
   states: State[] = [
   {value: 1, viewValue: 'Jammu and Kashmir'},
   {value: 2, viewValue: 'Himachal Pradesh'},
@@ -66,7 +65,7 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
     this.customerForm = new FormGroup({
       'address': new FormControl(null),
       'gstNo': new FormControl(null, [Validators.required, this.ValidateGSTNO.bind(this)]),
-      'contactNo': new FormControl(null, Validators.required),
+      'contactNo': new FormControl(null),
       'email': new FormControl(null),
       'contactPerson': new FormControl(null),
       'state': new FormControl(null, Validators.required)
@@ -108,7 +107,6 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
     this.customer_list.checkGSTno(this.customerForm.get('gstNo').value).subscribe((res) =>{
       if(res[0]!=undefined){
         if(res[0].cust_name != this.customerForm.get('customerName').value.cust_name && this.customerForm.get('gstNo').value != 'URD'){console.log(this.customerForm.get('customerName').value);
-          this.uniqueGST = false;
           return;
         }
       }
@@ -121,7 +119,6 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
           alert('Error inserting data');
         }
       });
-      this.uniqueGST = true;
       this.customerForm.get('customerName').reset({"cust_name": ""});
       this.customerForm.get('gstNo').reset();
       this.customerForm.get('address').reset();

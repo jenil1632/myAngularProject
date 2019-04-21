@@ -36,10 +36,10 @@
 <span>BUYERS ADDRESS: </span>
 </div>
 <div class = "one-third middle">
-<span>{{address}}</span>
+<span>{{address=='null' ? address : emptyString}}</span>
 </div>
 <div class = "one-third right">
-<span>BUYERS TELL NO: {{contactNo}}</span>
+<span>BUYERS TELL NO: {{contactNo=='null' ? contactNo : emptyString}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -47,10 +47,10 @@
 <span>EMAIL ID: </span>
 </div>
 <div class = "one-third middle">
-<span>{{email}}</span>
+<span>{{email=='null' ? email : emptyString}}</span>
 </div>
 <div class = "one-third right">
-<span>PO NO: {{poNo}}</span>
+<span>PO NO: {{poNo=='null' ? poNo : emptyString}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -58,10 +58,10 @@
 <span>CONTACT PERSON: </span>
 </div>
 <div class = "one-third middle">
-<span>{{contactName}}</span>
+<span>{{contactName=='null' ? contactName : emptyString}}</span>
 </div>
 <div class = "one-third right">
-<span>PAYMENT MODE: {{paymentType}}</span>
+<span>PAYMENT MODE: {{paymentType=='null' ? paymentType : emptyString}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -72,7 +72,7 @@
 <span>MUMBAI</span>
 </div>
 <div class = "one-third right">
-<span>PO DATE: {{poDate}}</span>
+<span>PO DATE: {{poDate=='null' ? poDate : emptyString}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -94,7 +94,7 @@
 <span>{{gstNo}}</span>
 </div>
 <div class = "one-third right">
-<span>E-WAY NO: {{ewayNo}}</span>
+<span>E-WAY NO: {{ewayNo=='null' ? ewayNo : emptyString}}</span>
 </div>
 </div>
 <table>
@@ -148,10 +148,10 @@
 <tfoot style="background-color:#d3d3d3; font-weight: 700">
   <tr>
     <td colspan="5">TOTAL AMOUNT DUE</td>
-    <td class = "totalValue">{{totalTaxAmt}}</td>
+    <td class = "totalValue">{{totalTaxAmt | number:'1.0-0'}}</td>
     <td></td>
-    <td class = "totalTaxAmt">{{totalValue}}</td>
-    <td class = "totalGross">{{totalGross}}</td>
+    <td class = "totalTaxAmt">{{totalValue | number:'1.0-0'}}</td>
+    <td class = "totalGross">{{totalGross | number:'1.0-0'}}</td>
   </tr>
 </tfoot>
 </table>
@@ -210,7 +210,7 @@
       <td >{{selectedState.value==27 ? taxable28*14/100 + taxable18*9/100 + taxable12*6/100 : emptyString}}</td>
       <td >{{selectedState.value==27 ? taxable28*14/100 + taxable18*9/100 + taxable12*6/100 : emptyString}}</td>
       <td >{{selectedState.value!=27 ? taxable28*28/100 + taxable18*18/100 + taxable12*12/100 : emptyString}}</td>
-      <td>{{totalGross}}</td>
+      <td>{{totalGross | number:'1.0-0'}}</td>
     </tr>
   </tbody>
 </table>

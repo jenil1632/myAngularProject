@@ -2,17 +2,18 @@
   <div class = "row">
   <div class="entry1"><mat-form-field class="example-full-width">
     <input matInput placeholder="Name" required formControlName = "customerName">
-  <mat-error *ngIf = "!uniqueGST">Customer with GST No. already registered</mat-error></mat-form-field></div>
+  </mat-form-field></div>
     <div class="entry1"><mat-form-field class="example-full-width">
         <input matInput placeholder="GST No." formControlName = "gstNo">
-      <mat-error *ngIf = "customerForm.get('gstNo').invalid">GST No. must be of 15 digits</mat-error></mat-form-field>
+      <mat-error *ngIf = "customerForm.get('gstNo').invalid">GST No. must be of 15 digits</mat-error>
+    </mat-form-field>
       </div>
   </div>
     <div class = "row">
       <div class="entry1"><mat-form-field class="example-full-width">
           <input matInput placeholder="Name of Contact Person" formControlName = "contactPerson"></mat-form-field></div>
           <div class="entry1"><mat-form-field class="example-full-width">
-              <input matInput placeholder="Contact No." required formControlName = "contactNo"></mat-form-field></div>
+              <input matInput placeholder="Contact No." formControlName = "contactNo"></mat-form-field></div>
             </div>
     <div class = "row">
       <div class="entry1"><mat-form-field class="example-full-width">

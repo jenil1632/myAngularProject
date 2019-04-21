@@ -41,7 +41,12 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
     this.navigationSubsciption = this.router.events.subscribe((e: any) => {
       if(e instanceof NavigationEnd){
         this.purchases = new Array(15);
-        this.bill_no.getBillNo().subscribe(res => this.bill = res[0].invoice_no);
+        this.bill_no.getBillNo().subscribe((res) => {
+          if(res[0])
+        this.bill = res[0].invoice_no
+        else
+        this.bill = 1000;
+      });
         this.customer_list.getCustomers().subscribe(res =>{ this.customerList = res;});
         this.subscription = this.invoice_submit.getState().subscribe(res =>{
           if(res)
@@ -203,9 +208,9 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
         let tGross = this.someArray.controls.reduce((accumalator, currentValue)=>{
           return currentValue.get('gross').value + accumalator;
         }, 0);
-        this.productForm.patchValue({"totalValue": tValue});
-        this.productForm.patchValue({"totalTaxAmt": tTaxAmt});
-        this.productForm.patchValue({"totalGross": tGross});
+        this.productForm.patchValue({"totalValue": tValue.toFixed(0)});
+        this.productForm.patchValue({"totalTaxAmt": tTaxAmt.toFixed(0)});
+        this.productForm.patchValue({"totalGross": tGross.toFixed(0)});
       });
       control.get('rate').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
         control.patchValue({"value": e*control.get('qty').value});
@@ -221,9 +226,9 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
         let tGross = this.someArray.controls.reduce((accumalator, currentValue)=>{
           return currentValue.get('gross').value + accumalator;
         }, 0);
-        this.productForm.patchValue({"totalValue": tValue});
-        this.productForm.patchValue({"totalTaxAmt": tTaxAmt});
-        this.productForm.patchValue({"totalGross": tGross});
+        this.productForm.patchValue({"totalValue": tValue.toFixed(0)});
+        this.productForm.patchValue({"totalTaxAmt": tTaxAmt.toFixed(0)});
+        this.productForm.patchValue({"totalGross": tGross.toFixed(0)});
       });
     });
     document.getElementById('customerName').addEventListener('click', ()=>{

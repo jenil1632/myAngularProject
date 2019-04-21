@@ -18,7 +18,6 @@ export interface State {
 export class NewCustomerEntryComponent implements OnInit {
 
   customerForm: FormGroup;
-  uniqueGST: boolean = true;
   states: State[] = [
   {value: 1, viewValue: 'Jammu and Kashmir'},
   {value: 2, viewValue: 'Himachal Pradesh'},
@@ -65,7 +64,7 @@ export class NewCustomerEntryComponent implements OnInit {
       'customerName': new FormControl(null, Validators.required),
       'address': new FormControl(null),
       'gstNo': new FormControl(null, [Validators.required, this.ValidateGSTNO.bind(this)]),
-      'contactNo': new FormControl(null, [Validators.required, this.ValidateContactNO.bind(this)]),
+      'contactNo': new FormControl(null),
       'email': new FormControl(null),
       'contactPerson': new FormControl(null),
       'state': new FormControl(null, Validators.required)
@@ -78,8 +77,8 @@ export class NewCustomerEntryComponent implements OnInit {
       return;
     }
     this.customer_list.checkGSTno(this.customerForm.get('gstNo').value).subscribe((res: []) =>{
-      if(res.length!=0){
-        this.uniqueGST = false;
+      if(res.length!=0 && this.customerForm.get('gstNo').value != 'URD'){
+        alert('Customer with GST No. already registered');
         return;
       }
       this.data_insert.insertCustomer(this.customerForm.value).subscribe(function(res){
@@ -91,7 +90,6 @@ export class NewCustomerEntryComponent implements OnInit {
           alert('Error inserting data');
         }
       });
-      this.uniqueGST = true;
       this.customerForm.reset();
     });
   }
@@ -99,7 +97,7 @@ export class NewCustomerEntryComponent implements OnInit {
   ValidateGSTNO(control: FormControl) {
     if(control.value!=null)
     {
-    if (control.value.length == 15 || control.value == 'URD'){
+    if (control.value.length == 15 || control.value.toUpperCase() == 'URD'){
       return null;
     }
       return { validGSTNO: true };
@@ -107,17 +105,4 @@ export class NewCustomerEntryComponent implements OnInit {
     return null;
   }
 
-  ValidateContactNO(control: FormControl) {
-    if(control.value!=null)
-    {
-    if(control.value.length == 10 || control.value.length == 8)
-    {
-      return null;
-    }
-    else{
-      return { validContactNO: true };
-  }
-  }
-    return null;
-  }
 }

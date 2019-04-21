@@ -182,9 +182,9 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         let tGross = this.someArray.controls.reduce((accumalator, currentValue)=>{
           return currentValue.get('gross').value + accumalator;
         }, 0);
-        this.productForm.patchValue({"totalValue": tValue});
-        this.productForm.patchValue({"totalTaxAmt": tTaxAmt});
-        this.productForm.patchValue({"totalGross": tGross});
+        this.productForm.patchValue({"totalValue": tValue.toFixed(0)});
+        this.productForm.patchValue({"totalTaxAmt": tTaxAmt.toFixed(0)});
+        this.productForm.patchValue({"totalGross": tGross.toFixed(0)});
       });
       control.get('rate').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
         control.patchValue({"value": e*control.get('qty').value});
@@ -200,9 +200,9 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         let tGross = this.someArray.controls.reduce((accumalator, currentValue)=>{
           return currentValue.get('gross').value + accumalator;
         }, 0);
-        this.productForm.patchValue({"totalValue": tValue});
-        this.productForm.patchValue({"totalTaxAmt": tTaxAmt});
-        this.productForm.patchValue({"totalGross": tGross});
+        this.productForm.patchValue({"totalValue": tValue.toFixed(0)});
+        this.productForm.patchValue({"totalTaxAmt": tTaxAmt.toFixed(0)});
+        this.productForm.patchValue({"totalGross": tGross.toFixed(0)});
       });
     });
     this.productForm.get('billNo').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
