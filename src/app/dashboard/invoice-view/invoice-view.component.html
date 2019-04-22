@@ -1,4 +1,5 @@
 <div id = "printView">
+  <div id = "borderDiv">
 <div>
 <span style="font-size: 12px; display: block; text-align: right; margin-top: 8px">TAX INVOICE FOR SUPPLY OF GOODS</span>
 </div>
@@ -36,10 +37,10 @@
 <span>BUYERS ADDRESS: </span>
 </div>
 <div class = "one-third middle">
-<span>{{address=='null' ? address : emptyString}}</span>
+<span>{{address}}</span>
 </div>
 <div class = "one-third right">
-<span>BUYERS TELL NO: {{contactNo=='null' ? contactNo : emptyString}}</span>
+<span>BUYERS TELL NO: {{contactNo}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -47,10 +48,10 @@
 <span>EMAIL ID: </span>
 </div>
 <div class = "one-third middle">
-<span>{{email=='null' ? email : emptyString}}</span>
+<span>{{email}}</span>
 </div>
 <div class = "one-third right">
-<span>PO NO: {{poNo=='null' ? poNo : emptyString}}</span>
+<span>PO NO: {{poNo}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -58,10 +59,10 @@
 <span>CONTACT PERSON: </span>
 </div>
 <div class = "one-third middle">
-<span>{{contactName=='null' ? contactName : emptyString}}</span>
+<span>{{contactName}}</span>
 </div>
 <div class = "one-third right">
-<span>PAYMENT MODE: {{paymentType=='null' ? paymentType : emptyString}}</span>
+<span>PAYMENT MODE: {{paymentType}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -72,7 +73,7 @@
 <span>MUMBAI</span>
 </div>
 <div class = "one-third right">
-<span>PO DATE: {{poDate=='null' ? poDate : emptyString}}</span>
+<span>PO DATE: {{poDate}}</span>
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; padding: 0 8px; font-size: 14px">
@@ -94,7 +95,7 @@
 <span>{{gstNo}}</span>
 </div>
 <div class = "one-third right">
-<span>E-WAY NO: {{ewayNo=='null' ? ewayNo : emptyString}}</span>
+<span>E-WAY NO: {{ewayNo}}</span>
 </div>
 </div>
 <table>
@@ -253,6 +254,7 @@
 </div>
 <div class = "one-third">
 <span>PROPRIETOR</span>
+</div>
 </div>
 </div>
 </div>

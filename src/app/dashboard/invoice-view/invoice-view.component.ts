@@ -91,13 +91,13 @@ taxable28: number = 0;
         this.taxable28 = 0;
         this.poDate = '';
         if(info.length!=0)
-        {
+        {console.log(info[0]);
         this.customerName = info[0].cust_name;
-        this.invoiceInfo.getCustomer({"customerName": this.customerName}).subscribe((cust)=>{
-        this.address = cust[0].address;
-        this.contactNo = cust[0].telephone;
-        this.contactName = cust[0].contact_name;
-        this.email = cust[0].email;
+        this.invoiceInfo.getCustomer({"customerName": this.customerName}).subscribe((cust)=>{console.log(cust);
+        this.address = cust[0].address=="null" ? this.emptyString : cust[0].address;
+        this.contactNo =  cust[0].telephone =="null" ? this.emptyString : cust[0].telephone;
+        this.contactName = cust[0].contact_name == "null" ? this.emptyString : cust[0].contact_name;
+        this.email = cust[0].email=="null" ? this.emptyString : cust[0].email;
         this.gstNo = cust[0].gst_no;
         let tempState = this.states.find((elem)=>{
           return elem.value == cust[0].state;
@@ -105,12 +105,12 @@ taxable28: number = 0;
         this.selectedState = tempState ? tempState : this.selectedState;
         });
         this.paymentType =  info[0].payment_type;
-        this.poNo = info[0].po_no;
-        this.ewayNo = info[0].eway_no;
+        this.poNo = info[0].po_no=="null" ? this.emptyString : info[0].po_no;
+        this.ewayNo = info[0].eway_no=="null" ? this.emptyString : info[0].eway_no;
         if(info[0].po_date!=null)
         {
           let tmpPoDate = new Date(info[0].po_date);
-        this.poDate = `${tmpPoDate.getDate()}/${tmpPoDate.getMonth()+1}/${tmpPoDate.getFullYear()}`;
+        this.poDate = tmpPoDate.getFullYear()<2000 ? this.emptyString : `${tmpPoDate.getDate()}/${tmpPoDate.getMonth()+1}/${tmpPoDate.getFullYear()}`;
       }
         let tmpDate = new Date(info[0].invoice_date);
         this.invoiceDate =  `${tmpDate.getDate()}/${tmpDate.getMonth()+1}/${tmpDate.getFullYear()}`;
