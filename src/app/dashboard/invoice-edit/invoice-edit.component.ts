@@ -119,7 +119,6 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       this.someArray.push(new FormGroup({
         'qty': new FormControl(null),
-        'mrp': new FormControl(null),
         'rate': new FormControl(null),
         'taxRate': new FormControl({value: null, disabled: true}),
         'taxAmt': new FormControl({value: null, disabled: true}),
@@ -158,7 +157,6 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
             control.get('rate').clearValidators();
             control.get('rate').updateValueAndValidity();
             control.get('qty').reset();
-            control.get('mrp').reset();
             control.get('rate').reset();
             control.get('taxRate').reset();
             control.get('taxAmt').reset();
@@ -232,7 +230,6 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.someArray.at(i).get('childForm').setValue(pn);
         this.someArray.at(i).get('taxRate').setValue(info[i].tax_rate);
         this.someArray.at(i).get('qty').setValue(info[i].qty);
-        this.someArray.at(i).get('mrp').setValue(info[i].mrp);
         this.someArray.at(i).get('rate').setValue(info[i].unit_price);
        }
       });
@@ -276,7 +273,6 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   public resetEditForm(){
     this.someArray.controls.forEach(control =>{
      control.get('qty').reset();
-     control.get('mrp').reset();
      control.get('rate').reset();
      control.get('taxRate').reset();
      control.get('taxAmt').reset();

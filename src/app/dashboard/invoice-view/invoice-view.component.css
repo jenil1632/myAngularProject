@@ -32,3 +32,13 @@ th{
 .one-third span{
   display: block;
 }
+
+.gross, .taxamt, .value, .totalGross, .totalValue, .totalTaxAmt{
+  text-align: right;
+  padding-right: 4px;
+}
+
+.summary{
+  padding-right: 4px;
+   text-align: right;
+}

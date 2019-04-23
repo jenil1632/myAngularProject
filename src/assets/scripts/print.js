@@ -38,8 +38,18 @@ th{
 }
 
 #borderDiv{
-  margin: 8px;
+  margin: 4px;
   border: 1px solid black;
+}
+
+.gross, .taxamt, .value, .totalGross, .totalValue, .totalTaxAmt{
+  text-align: right;
+  padding-right: 4px;
+}
+
+.summary{
+  padding-right: 4px;
+   text-align: right;
 }
 </style>`);
 let inp = document.getElementById("billNo");

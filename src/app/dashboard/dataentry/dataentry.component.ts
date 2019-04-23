@@ -99,7 +99,6 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
             });
              this.someArray.controls.forEach(control =>{
               control.get('qty').reset();
-              control.get('mrp').reset();
               control.get('rate').reset();
               control.get('taxRate').reset();
               control.get('taxAmt').reset();
@@ -148,7 +147,6 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       this.someArray.push(new FormGroup({
         'qty': new FormControl(null),
-        'mrp': new FormControl(null),
         'rate': new FormControl(null),
         'taxRate': new FormControl({value: null, disabled: true}),
         'taxAmt': new FormControl({value: null, disabled: true}),
@@ -185,7 +183,6 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
             control.get('rate').clearValidators();
             control.get('rate').updateValueAndValidity();
             control.get('qty').reset();
-            control.get('mrp').reset();
             control.get('rate').reset();
             control.get('taxRate').reset();
             control.get('taxAmt').reset();
