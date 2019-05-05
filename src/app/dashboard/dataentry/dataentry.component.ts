@@ -118,6 +118,7 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
              this.productForm.get('customerName').reset({"cust_name": ""});
              this.productForm.get('invoiceDate').reset();
              this.productForm.get('poDate').reset();
+             this.productForm.removeControl('invoiceNo');
             this.router.navigate(['/dataentry']);
           }
         });
