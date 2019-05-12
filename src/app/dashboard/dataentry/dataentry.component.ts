@@ -27,7 +27,6 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
   pdts: Pdt[];
   poDateString: string = "PO Date";
   bill: number;
-  noOfProducts: number = 0;
   subscription: Subscription;
   productForm: FormGroup;
   customerList: User[];
@@ -51,40 +50,38 @@ export class DataentryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subscription = this.invoice_submit.getState().subscribe(res =>{
           if(res)
           {
+            if(this.productForm.invalid)
+            {
+              this.invoice_submit.setState(false);
+              return;
+            }
             if(this.validateCustomerName(this.productForm.get('customerName')))
             {
               this.invoice_submit.setState(false);
               document.getElementById("customerName").classList.add("errorClass");
               return;
             }
-            this.someArray.controls.forEach(control =>{
-              if(control.get('childForm').value != null)
+            for(let j = 0; j<this.someArray.controls.length; j++){
+              let tempControl = this.someArray.controls[j];
+              if(tempControl.get('childForm').value != null)
               {
-                if(this.validateProductName(control))
+                if(!this.validateProductName(tempControl))
                 {
-                  this.invoice_submit.setState(false);
-                  this.exitLoop = true;
-                  alert("invalid product name(s)");
-                  return;
+                  if(tempControl.get('childForm').value == "" && tempControl.get('qty').value == null && tempControl.get('rate').value == null){
+                    continue;
+                  }
+                  else{
+                    this.invoice_submit.setEditState(false);
+                    this.exitLoop = true;
+                    alert("invalid product name(s)");
+                    break;
+                  }
                 }
               }
-              else{
-                this.noOfProducts++;
-              }
-            });
-            if(this.noOfProducts==15){
-              this.noOfProducts = 0;
-              alert("Please enter product name");
-              return;
             }
             if(this.exitLoop == true)
             {
               this.exitLoop = false;
-              return;
-            }
-            if(this.productForm.invalid)
-            {
-              this.invoice_submit.setState(false);
               return;
             }
             this.productForm.addControl('invoiceNo', new FormControl(this.bill+1, Validators.required));
@@ -244,6 +241,7 @@ public getTaxRate(x: string){
 ngOnDestroy(){
   this.subscription.unsubscribe();
   this.invoice_submit.setState(false);
+  this.someArray.reset();
 }
 
 public validateCustomerName(control: AbstractControl){
@@ -259,9 +257,9 @@ public validateCustomerName(control: AbstractControl){
 public validateProductName(control: AbstractControl){
   if(this.pdts.find(p =>{
     return p.product_name == control.value.childForm.product_name;
-  })){
-    return null;
+  })!= undefined){
+    return true;
   }
-  return true;
+  return false;
 }
 }

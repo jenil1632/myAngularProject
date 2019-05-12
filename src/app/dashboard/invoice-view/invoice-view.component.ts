@@ -31,43 +31,43 @@ export class InvoiceViewComponent implements OnInit {
   emptyString: string = " ";
   amountInWords: string;
   states: State[] = [
-  {value: 1, viewValue: 'Jammu and Kashmir'},
-  {value: 2, viewValue: 'Himachal Pradesh'},
-  {value: 3, viewValue: 'Punjab'},
-  {value: 4, viewValue: 'Chandigarh'},
-  {value: 5, viewValue: 'Uttarakhand'},
-  {value: 6, viewValue: 'Haryana'},
-  {value: 7, viewValue: 'Delhi'},
-  {value: 8, viewValue: 'Rajasthan'},
-  {value: 9, viewValue: 'Uttar Pradesh'},
-  {value: 10, viewValue: 'Bihar'},
-  {value: 11, viewValue: 'Sikkim'},
-  {value: 12, viewValue: 'Arunachal Pradesh'},
-  {value: 13, viewValue: 'Nagaland'},
-  {value: 14, viewValue: 'Manipur'},
-  {value: 15, viewValue: 'Mizoram'},
-  {value: 16, viewValue: 'Tripura'},
-  {value: 17, viewValue: 'Meghalaya'},
-  {value: 18, viewValue: 'Assam'},
-  {value: 19, viewValue: 'West Bengal'},
-  {value: 20, viewValue: 'Jharkhand'},
-  {value: 21, viewValue: 'Odisha'},
-  {value: 22, viewValue: 'Chattisgarh'},
-  {value: 23, viewValue: 'Madhya Pradesh'},
-  {value: 24, viewValue: 'Gujarat'},
-  {value: 25, viewValue: 'Daman and Diu'},
-  {value: 26, viewValue: 'Dadra and Nagar Haveli'},
-  {value: 27, viewValue: 'Maharashtra'},
-  {value: 28, viewValue: 'Andhra Pradesh (old)'},
-  {value: 29, viewValue: 'Karnataka'},
-  {value: 30, viewValue: 'Goa'},
-  {value: 31, viewValue: 'Lakshadweep'},
-  {value: 32, viewValue: 'Kerala'},
-  {value: 33, viewValue: 'Tamil Nadu'},
-  {value: 34, viewValue: 'Puducherry'},
-  {value: 35, viewValue: 'Andaman and Nicobar islands'},
-  {value: 36, viewValue: 'Telangana'},
-  {value: 37, viewValue: 'Andhra Pradesh (new)'}
+  {value: 1, viewValue: 'JAMMU AND KASHMIR'},
+  {value: 2, viewValue: 'HIMACHAL PRADESH'},
+  {value: 3, viewValue: 'PUNJAB'},
+  {value: 4, viewValue: 'CHANDIGARH'},
+  {value: 5, viewValue: 'UTTARAKHAND'},
+  {value: 6, viewValue: 'HARYANA'},
+  {value: 7, viewValue: 'DELHI'},
+  {value: 8, viewValue: 'RAJASTHAN'},
+  {value: 9, viewValue: 'UTTAR PRADESH'},
+  {value: 10, viewValue: 'BIHAR'},
+  {value: 11, viewValue: 'SIKKIM'},
+  {value: 12, viewValue: 'ARUNACHAL PRADESH'},
+  {value: 13, viewValue: 'NAGALAND'},
+  {value: 14, viewValue: 'MANIPUR'},
+  {value: 15, viewValue: 'MIZORAM'},
+  {value: 16, viewValue: 'TRIPURA'},
+  {value: 17, viewValue: 'MEGHALAYA'},
+  {value: 18, viewValue: 'ASSAM'},
+  {value: 19, viewValue: 'WEST BENGAL'},
+  {value: 20, viewValue: 'JHARKHAND'},
+  {value: 21, viewValue: 'ODISHA'},
+  {value: 22, viewValue: 'CHATTISGARH'},
+  {value: 23, viewValue: 'MADHYA PRADESH'},
+  {value: 24, viewValue: 'GUJARAT'},
+  {value: 25, viewValue: 'DAMAN AND DIU'},
+  {value: 26, viewValue: 'DADRA AND NAGAR HAVELI'},
+  {value: 27, viewValue: 'MAHARASHTRA'},
+  {value: 28, viewValue: 'ANDHRA PRADESH (OLD)'},
+  {value: 29, viewValue: 'KARNATAKA'},
+  {value: 30, viewValue: 'GOA'},
+  {value: 31, viewValue: 'LAKSHADWEEP'},
+  {value: 32, viewValue: 'KERALA'},
+  {value: 33, viewValue: 'TAMIL NADU'},
+  {value: 34, viewValue: 'PUDUCHERRY'},
+  {value: 35, viewValue: 'ANDAMAN AND NICOBAR ISLANDS'},
+  {value: 36, viewValue: 'TELANGANA'},
+  {value: 37, viewValue: 'ANDHRA PRADESH (NEW)'}
 ];
 selectedState: State;
 taxable12: number = 0;
@@ -76,7 +76,7 @@ taxable28: number = 0;
 
   constructor(private invoiceInfo: Invoice_info) {
     this.products = new Array(15);
-    this.selectedState = {value: 27, viewValue: 'Maharashtra'};
+    this.selectedState = {value: 27, viewValue: 'MAHARASHTRA'};
    }
 
   ngOnInit() {
@@ -114,7 +114,7 @@ taxable28: number = 0;
       }
         let tmpDate = new Date(info[0].invoice_date);
         this.invoiceDate =  `${tmpDate.getDate()}/${tmpDate.getMonth()+1}/${tmpDate.getFullYear()}`;
-        for(let i=0; i<info.length; i++)
+        for(let i=info.length-1; i>=0; i--)
         {
           let product: BillProduct = {
             productName: null,
@@ -157,7 +157,6 @@ taxable28: number = 0;
         this.invoiceInfo.getAmountInWords({"amt": this.totalGross}).subscribe((w)=>{
           this.amountInWords = w.amt;
         });
-        console.log(this.products);
         }
       });
     });

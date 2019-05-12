@@ -71,7 +71,7 @@ app.get('/lastBill', (req, res)=>{
 });
 
 app.post('/insertCustomer', (req, res)=>{console.log(req.body);
-let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name,state) VALUES('${req.body.customerName}', '${req.body.address}', '${req.body.gstNo}', '${req.body.contactNo}', '${req.body.email}', '${req.body.contactPerson}', ${req.body.state});`;
+let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name,state) VALUES('${req.body.customerName.toUpperCase()}', '${req.body.address? req.body.address.toUpperCase() : null}', '${req.body.gstNo.toUpperCase()}', '${req.body.contactNo}', '${req.body.email? req.body.email.toUpperCase() : null}', '${req.body.contactPerson? req.body.contactPerson.toUpperCase() : null}', ${req.body.state});`;
 console.log(queryString);
        client.query(queryString, (err, result)=>{
          if(err)
@@ -84,7 +84,7 @@ console.log(queryString);
 });
 
 app.post('/insertProduct', (req, res)=>{
-let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.body.productName}', '${req.body.rate}', '${req.body.hsn}');`;
+let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.body.productName.toUpperCase()}', '${req.body.rate}', '${req.body.hsn}');`;
        client.query(queryString, (err, result)=>{
          if(err)
          {
@@ -160,7 +160,7 @@ for(let i=0; i<15;i++)
     month = pDate.getMonth()+1;
     year = pDate.getFullYear();
     let poDate = `${day}-${month}-${year}`;
-    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.invoiceNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
+    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.invoiceNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo? req.body.poNo.toUpperCase() : null}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo? req.body.ewayNo.toUpperCase() : null}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)
@@ -196,7 +196,7 @@ for(let i=0; i<15;i++)
     month = pDate.getMonth()+1;
     year = pDate.getFullYear();
     let poDate = `${day}-${month}-${year}`;
-    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.billNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
+    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.billNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo? req.body.poNo.toUpperCase() : null}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo? req.body.ewayNo.toUpperCase() : null}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)

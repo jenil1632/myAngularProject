@@ -26,7 +26,6 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   purchases: PurchaseEntry[];
   pdts: Pdt[];
   poDateString: string = "PO Date";
-  noOfProducts: number = 0;
   subscription: Subscription;
   productForm: FormGroup;
   toggleTaxRate: boolean;
@@ -47,40 +46,41 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subscription = this.invoice_submit.getEditState().subscribe(res =>{
           if(res)
           {console.log('submission in progress');
+          if(this.productForm.invalid)
+          {
+            this.invoice_submit.setEditState(false);
+            return;
+          }
             if(this.validateCustomerName(this.productForm.get('customerName')))
             {console.log('edit-customer');
               this.invoice_submit.setEditState(false);
               document.getElementById("customerName").classList.add("errorClass");
               return;
             }
-            this.someArray.controls.forEach(control =>{
-              if(control.get('childForm').value != null)
+            for(let j = 0; j<this.someArray.controls.length; j++){
+              let tempControl = this.someArray.controls[j];console.log(tempControl);
+              if(tempControl.get('childForm').value != null)
               {
-                if(this.validateProductName(control))
-                {console.log(control.value);
-                  this.invoice_submit.setEditState(false);
-                  this.exitLoop = true;
-                  alert("invalid product name(s)");
-                  return;
+                if(!this.validateProductName(tempControl))
+                {
+                  console.log(tempControl.get('childForm').value == "");
+                  console.log(tempControl.get('qty').value == null);
+                  console.log(tempControl.get('rate').value == null);
+                  if(tempControl.get('childForm').value == "" && tempControl.get('qty').value == null && tempControl.get('rate').value == null){
+                    continue;
+                  }
+                  else{
+                    this.invoice_submit.setEditState(false);
+                    this.exitLoop = true;
+                    alert("invalid product name(s)");
+                    break;
+                  }
                 }
               }
-              else{
-                this.noOfProducts++;
-              }
-            });
-            if(this.noOfProducts==15){
-              this.noOfProducts = 0;
-              alert("Please enter product name");
-              return;
             }
             if(this.exitLoop == true)
             {
               this.exitLoop = false;
-              return;
-            }
-            if(this.productForm.invalid)
-            {
-              this.invoice_submit.setEditState(false);
               return;
             }
             this.data_insert.editInvoice(this.productForm).subscribe(function(s){
@@ -249,6 +249,7 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(){
   this.subscription.unsubscribe();
   this.invoice_submit.setEditState(false);
+  this.someArray.reset();
   }
 
   public validateCustomerName(control: AbstractControl){
@@ -264,10 +265,10 @@ export class InvoiceEditComponent implements OnInit, AfterViewInit, OnDestroy {
   public validateProductName(control: AbstractControl){
     if(this.pdts.find(p =>{
       return p.product_name == control.value.childForm.product_name;
-    })){
-      return null;
+    })!= undefined){
+      return true;
     }
-    return true;
+    return false;
   }
 
   public resetEditForm(){

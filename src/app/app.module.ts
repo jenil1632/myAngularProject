@@ -10,7 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule, MatAutocompleteModule, MatSelectModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatInputModule, MatAutocompleteModule, MatSelectModule, MAT_DATE_FORMATS, DateAdapter } from '@angular/material';
 import { DataentryComponent } from './dashboard/dataentry/dataentry.component';
 import { DatepickerComponent } from './utils/datepicker/datepicker.component';
 import { NameAutocompleteComponent } from './utils/name-autocomplete/name-autocomplete.component';
@@ -32,6 +32,7 @@ import { InvoiceViewComponent } from './dashboard/invoice-view/invoice-view.comp
 import { ReportsComponent } from './dashboard/reports/reports.component';
 import { ProductEditComponent } from './dashboard/product-edit/product-edit.component';
 import { CustomerEditComponent } from './dashboard/customer-edit/customer-edit.component';
+import { CustomDateAdapter, APP_DATE_FORMATS } from './utils/custom-date-adapter';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import { CustomerEditComponent } from './dashboard/customer-edit/customer-edit.c
     MatAutocompleteModule,
     MatSelectModule
   ],
-  providers: [MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, Customer_list, Product_list, Product_info, Bill_no, Data_insert, Invoice_info, Invoice_submit, Data_delete],
+  providers: [MatDatepickerModule, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}, Customer_list, Product_list, Product_info, Bill_no, Data_insert, Invoice_info, Invoice_submit, Data_delete],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
