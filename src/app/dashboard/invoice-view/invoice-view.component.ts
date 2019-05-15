@@ -152,7 +152,7 @@ taxable28: number = 0;
          this.totalValue += product.value;
          this.products.unshift(product);
         }
-        this.products.splice(14, this.products.length-15);
+        this.products.splice(15, this.products.length-15);
         this.products = [...this.products];
         this.invoiceInfo.getAmountInWords({"amt": this.totalGross}).subscribe((w)=>{
           this.amountInWords = w.amt;

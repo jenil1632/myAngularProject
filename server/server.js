@@ -71,7 +71,7 @@ app.get('/lastBill', (req, res)=>{
 });
 
 app.post('/insertCustomer', (req, res)=>{console.log(req.body);
-let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name,state) VALUES('${req.body.customerName.toUpperCase()}', '${req.body.address? req.body.address.toUpperCase() : null}', '${req.body.gstNo.toUpperCase()}', '${req.body.contactNo}', '${req.body.email? req.body.email.toUpperCase() : null}', '${req.body.contactPerson? req.body.contactPerson.toUpperCase() : null}', ${req.body.state});`;
+let queryString = `INSERT INTO customers (cust_name,address,gst_no,telephone,email,contact_name,state) VALUES('${req.body.customerName.toUpperCase().replace("\'", "\'\'")}', '${req.body.address? req.body.address.toUpperCase() : null}', '${req.body.gstNo.toUpperCase()}', '${req.body.contactNo}', '${req.body.email? req.body.email.toUpperCase() : null}', '${req.body.contactPerson? req.body.contactPerson.toUpperCase() : null}', ${req.body.state});`;
 console.log(queryString);
        client.query(queryString, (err, result)=>{
          if(err)
@@ -84,7 +84,7 @@ console.log(queryString);
 });
 
 app.post('/insertProduct', (req, res)=>{
-let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.body.productName.toUpperCase()}', '${req.body.rate}', '${req.body.hsn}');`;
+let queryString = `INSERT INTO products (product_name,rate,hsn) VALUES('${req.body.productName.toUpperCase().replace("\'", "\'\'")}', '${req.body.rate}', '${req.body.hsn}');`;
        client.query(queryString, (err, result)=>{
          if(err)
          {
@@ -108,7 +108,7 @@ let queryString = `SELECT * FROM datatable WHERE invoice_no = ${req.body.invoice
 });
 
 app.post('/getCustomer', (req, res)=>{
-let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.customerName}';`;
+let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.customerName.replace("\'", "\'\'")}';`;
        client.query(queryString, (err, result)=>{
          if(err)
          {
@@ -120,7 +120,7 @@ let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.custome
 });
 
 app.post('/productHSN', (req, res)=>{
-let queryString = `SELECT hsn FROM products WHERE product_name = '${req.body.productName}';`;
+let queryString = `SELECT hsn FROM products WHERE product_name = '${req.body.productName.replace("\'", "\'\'")}';`;
        client.query(queryString, (err, result)=>{
          if(err)
          {
@@ -160,7 +160,7 @@ for(let i=0; i<15;i++)
     month = pDate.getMonth()+1;
     year = pDate.getFullYear();
     let poDate = `${day}-${month}-${year}`;
-    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.invoiceNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo? req.body.poNo.toUpperCase() : null}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo? req.body.ewayNo.toUpperCase() : null}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
+    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.invoiceNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name.replace("\'", "\'\'")}', '${orderno}', '${req.body.poNo? req.body.poNo.toUpperCase() : null}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo? req.body.ewayNo.toUpperCase() : null}', '${req.body.products[i].childForm.product_name.replace("\'", "\'\'")}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)
@@ -196,7 +196,7 @@ for(let i=0; i<15;i++)
     month = pDate.getMonth()+1;
     year = pDate.getFullYear();
     let poDate = `${day}-${month}-${year}`;
-    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.billNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name}', '${orderno}', '${req.body.poNo? req.body.poNo.toUpperCase() : null}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo? req.body.ewayNo.toUpperCase() : null}', '${req.body.products[i].childForm.product_name}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
+    let queryString = `INSERT INTO datatable (invoice_no,invoice_date,cust_name,order_no,po_no,po_date,eway_no,product_des,qty,unit_price,t_value,tax_rate,tax_value,bill_value,payment_type) VALUES (${req.body.billNo}, to_date('${invoiceDate}', 'DD/MM/YYYY'), '${req.body.customerName.cust_name.replace("\'", "\'\'")}', '${orderno}', '${req.body.poNo? req.body.poNo.toUpperCase() : null}', to_date('${poDate}', 'DD/MM/YYYY'), '${req.body.ewayNo? req.body.ewayNo.toUpperCase() : null}', '${req.body.products[i].childForm.product_name.replace("\'", "\'\'")}', ${req.body.products[i].qty}, ${req.body.products[i].rate}, ${req.body.products[i].value}, ${req.body.products[i].taxRate}, ${req.body.products[i].taxAmt}, ${req.body.products[i].gross}, '${req.body.paymentMode}');`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)
@@ -291,7 +291,7 @@ app.post('/checkGSTno', (req, res)=>{
 });
 
 app.post('/getCustomerData', (req, res)=>{
-    let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.cust_name}';`;
+    let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.cust_name.replace("\'", "\'\'")}';`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)
@@ -305,7 +305,7 @@ app.post('/getCustomerData', (req, res)=>{
 });
 
 app.post('/productData', (req, res)=>{
-       client.query(`SELECT * FROM products WHERE product_name = '${req.body.product_name}'`, (err, result)=>{
+       client.query(`SELECT * FROM products WHERE product_name = '${req.body.product_name.replace("\'", "\'\'")}'`, (err, result)=>{
          if(err)
          {
            console.log(err);
@@ -317,7 +317,7 @@ app.post('/productData', (req, res)=>{
 
 app.post('/editProduct', (req, res)=>{
        console.log(req);
-       client.query(`UPDATE products SET hsn = '${req.body.hsn}', rate = '${req.body.rate}' WHERE product_name = '${req.body.productName.product_name}'`, (err, result)=>{
+       client.query(`UPDATE products SET hsn = '${req.body.hsn}', rate = '${req.body.rate}' WHERE product_name = '${req.body.productName.product_name.replace("\'", "\'\'")}'`, (err, result)=>{
          if(err)
          {
            console.log(err);
@@ -328,7 +328,7 @@ app.post('/editProduct', (req, res)=>{
 });
 
 app.post('/editCustomer', (req, res)=>{
-       client.query(`UPDATE customers SET gst_no = '${req.body.gstNo}', address = '${req.body.address}', telephone = '${req.body.contactNo}', email = '${req.body.email}', contact_name = '${req.body.contactPerson}', state = '${req.body.state}' WHERE cust_name = '${req.body.customerName.cust_name}'`, (err, result)=>{
+       client.query(`UPDATE customers SET gst_no = '${req.body.gstNo}', address = '${req.body.address}', telephone = '${req.body.contactNo}', email = '${req.body.email}', contact_name = '${req.body.contactPerson}', state = '${req.body.state}' WHERE cust_name = '${req.body.customerName.cust_name.replace("\'", "\'\'")}'`, (err, result)=>{
          if(err)
          {
            console.log(err);
