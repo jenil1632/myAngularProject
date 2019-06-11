@@ -26,7 +26,7 @@ a{
   padding: 15px;
 }
 
-#submitButton{
+.submitButton{
   display: block;
   margin: 0 auto;
   padding: 0 36px;

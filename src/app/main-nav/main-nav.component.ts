@@ -7,6 +7,7 @@ import { Invoice_submit } from './../services/invoice_submit.service';
 
 
 declare var printInvoice: any;
+declare var exportTableToExcel: any;
 
 @Component({
   selector: 'app-main-nav',
@@ -33,5 +34,9 @@ export class MainNavComponent {
 
   createPrintInvoice(){
     new printInvoice();
+  }
+
+  createExcelFile(){
+    new exportTableToExcel();
   }
 }
