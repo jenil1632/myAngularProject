@@ -228,7 +228,7 @@ app.post('/inWords', (req, res)=>{
   res.send({"amt": converter.toWords(req.body.amt)});
 });
 
-app.post('/getReports', (req, res)=>{
+app.post('/getReports', (req, res)=>{ console.log(req.body);
     let fDate = new Date(req.body.fromDate);
     let day = fDate.getDate();
     let month = fDate.getMonth()+1;
@@ -239,7 +239,14 @@ app.post('/getReports', (req, res)=>{
     month = tDate.getMonth()+1;
     year = tDate.getFullYear();
     let toDate = `${day}-${month}-${year}`;
-    let queryString = `SELECT * FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY');`;
+    let gstRate = req.body.gstRate;
+    let queryString = '';
+    if(gstRate == 'all'){
+      queryString = `SELECT * FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY');`;
+    }
+    else{
+      queryString = `SELECT * FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY') AND tax_rate = ${gstRate};`;
+    }
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)
@@ -263,7 +270,14 @@ app.post('/getUniqueDates', (req, res)=>{
     month = tDate.getMonth()+1;
     year = tDate.getFullYear();
     let toDate = `${day}-${month}-${year}`;
-    let queryString = `SELECT DISTINCT invoice_no FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY');`;
+    let gstRate = req.body.gstRate;
+    let queryString = '';
+    if(gstRate == 'all'){
+      queryString = `SELECT DISTINCT invoice_no FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY');`;
+    }
+    else{
+      queryString = `SELECT DISTINCT invoice_no FROM datatable WHERE invoice_date BETWEEN to_date('${fromDate}', 'DD/MM/YYYY') AND to_date('${toDate}', 'DD/MM/YYYY') AND tax_rate = ${gstRate};`;
+    }
     console.log(queryString);
     client.query(queryString, (err, result)=>{
       if(err)

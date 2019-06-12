@@ -21,10 +21,14 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   totalTax18 = 0;
   totalBill = 0;
   value = 0;
+  rates = [5, 12, 18, 'all'];
+  displayRateColumn = 'all';
+
   constructor(private invoice_info: Invoice_info) { }
 
   ngOnInit() {
     this.reportsForm = new FormGroup({
+      'gstRate': new FormControl(null, Validators.required)
     });
   }
 
@@ -38,9 +42,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     this.totalTax12 = 0;
     this.totalTax18 = 0;
     this.resultArray = [];
+    this.value = 0;
     this.result = false;
+    this.displayRateColumn = this.reportsForm.get('gstRate').value;
     this.invoice_info.getReports(this.reportsForm).subscribe(res=>{
-      if(res.length>0){
+      if(res.length>0){console.log(res);
         this.invoice_info.getUniqueDates(this.reportsForm).subscribe((invoices) =>{
           invoices.forEach((inv)=>{
             let tax18 = 0;
@@ -54,11 +60,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
               if(inv.invoice_no == order.invoice_no){
                 this.value += order.t_value;
                 t_value += order.t_value;
+                total += order.bill_value;
+                this.totalBill += order.bill_value;
                 if(firstBill){
                   invDate = order.invoice_date;
                   cName = order.cust_name;
-                  total = order.bill_value;
-                  this.totalBill += order.bill_value;
                   firstBill = false;
                 }
                 if(order.tax_rate == 18)
