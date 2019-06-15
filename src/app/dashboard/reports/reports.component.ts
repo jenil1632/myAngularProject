@@ -83,10 +83,35 @@ export class ReportsComponent implements OnInit, AfterViewInit {
             let invoiceDate =  `${tmpDate.getDate()}/${tmpDate.getMonth()+1}/${tmpDate.getFullYear()}`;
             this.resultArray.push({"invoice_no": inv.invoice_no, "invoice_date": invoiceDate, "cust_name": cName, "taxable18": tax18, "taxable12": tax12, "bill_value": total, "taxable_value": t_value});
           });
+            this.resultArray.sort((a, b)=>{
+              let dateArray1 = a.invoice_date.split("/");
+              let dateArray2 = b.invoice_date.split("/");
+              let date1: any = new Date(parseInt(dateArray1[2]), parseInt(dateArray1[1])-1, parseInt(dateArray1[0]));
+              let date2: any = new Date(parseInt(dateArray2[2]), parseInt(dateArray2[1])-1, parseInt(dateArray2[0]));
+              return date1 - date2;
+            });
+              this.result = true;
         });
-                  this.result = true;
-      }console.log(this.resultArray);
+
+      }
     });
+  }
+
+  sortResults(results){console.log(results.length);
+    for(let i = 0; i< results.length; i++){
+      for(let j = 0; j < results.length - i - 1; j++){
+        let dateArray1 = results[j].invoice_date.split("/");
+        let dateArray2 = results[j+1].invoice_date.split("/");
+        let date1 = new Date(parseInt(dateArray1[2]), parseInt(dateArray1[1])-1, parseInt(dateArray1[0]));
+        let date2 = new Date(parseInt(dateArray2[2]), parseInt(dateArray2[1])-1, parseInt(dateArray2[0]));
+        if(date1 > date2){
+          let temp = results[j+1];
+          results[j+1] = results[j];
+          results[j] = temp;
+        }
+      }
+    }
+    console.log(results);
   }
 
 }
