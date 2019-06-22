@@ -45,10 +45,10 @@
       <td>{{resultRow.invoice_no}}</td>
       <td>{{resultRow.invoice_date}}</td>
       <td>{{resultRow.cust_name}}</td>
-      <td>{{resultRow.taxable_value}}</td>
-      <td *ngIf = "displayRateColumn == 'all' || displayRateColumn == 18">{{resultRow.taxable18}}</td>
-      <td *ngIf = "displayRateColumn == 'all' || displayRateColumn == 12">{{resultRow.taxable12}}</td>
-      <td>{{resultRow.bill_value}}</td>
+      <td>{{resultRow.taxable_value | number:'1.0-0'}}</td>
+      <td *ngIf = "displayRateColumn == 'all' || displayRateColumn == 18">{{resultRow.taxable18 | number:'1.0-0'}}</td>
+      <td *ngIf = "displayRateColumn == 'all' || displayRateColumn == 12">{{resultRow.taxable12 | number:'1.0-0'}}</td>
+      <td>{{resultRow.bill_value | number:'1.0-0'}}</td>
     </tr>
     </tbody>
     <tfoot>

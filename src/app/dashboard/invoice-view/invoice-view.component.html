@@ -139,8 +139,8 @@
   <td class = "rate">{{product ? product.rate : emptyString}}</td>
   <td class = "value">{{product ? product.taxAmt : emptyString}}</td>
   <td class = "taxrate">{{product ? product.taxRate : emptyString}}</td>
-  <td class = "taxamt">{{product ? product.value : emptyString}}</td>
-  <td class = "gross">{{product ? product.gross : emptyString}}</td>
+  <td class = "taxamt">{{product ? (product.value | number:'1.0-0') : emptyString}}</td>
+  <td class = "gross">{{product ? (product.gross | number:'1.0-0') : emptyString}}</td>
 </tr>
 </tbody>
 <tfoot style="background-color:#d3d3d3; font-weight: 700">
@@ -180,34 +180,34 @@
   <tbody>
     <tr>
       <td>12</td>
-      <td class = "summary">{{taxable12!=0 ? taxable12 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value==27 && taxable12!=0) ? taxable12*6/100 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value==27 && taxable12!=0) ? taxable12*6/100 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value!=27 && taxable12!=0) ? taxable12*12/100 : emptyString}}</td>
-      <td class = "summary">{{taxable12!=0 ? taxable12*112/100 : emptyString}}</td>
+      <td class = "summary">{{taxable12!=0 ? (taxable12 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable12!=0) ? (taxable12*6/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable12!=0) ? (taxable12*6/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value!=27 && taxable12!=0) ? (taxable12*12/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{taxable12!=0 ? (taxable12*112/100 | number:'1.0-0') : emptyString}}</td>
     </tr>
     <tr>
       <td>18</td>
-      <td class = "summary">{{taxable18!=0 ? taxable18 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value==27 && taxable18!=0) ? taxable18*9/100 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value==27 && taxable18!=0) ? taxable18*9/100 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value!=27 && taxable18!=0) ? taxable18*18/100 : emptyString}}</td>
-      <td class = "summary">{{taxable18!=0 ? taxable18*118/100 : emptyString}}</td>
+      <td class = "summary">{{taxable18!=0 ? (taxable18 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable18!=0) ? (taxable18*9/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable18!=0) ? (taxable18*9/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value!=27 && taxable18!=0) ? (taxable18*18/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{taxable18!=0 ? (taxable18*118/100 | number:'1.0-0') : emptyString}}</td>
     </tr>
     <tr>
       <td>28</td>
-      <td class = "summary">{{taxable28!=0 ? taxable28 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value==27 && taxable28!=0) ? taxable28*14/100 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value==27 && taxable28!=0) ? taxable28*14/100 : emptyString}}</td>
-      <td class = "summary">{{(selectedState.value!=27 && taxable28!=0) ? taxable28*28/100 : emptyString}}</td>
-      <td class = "summary">{{taxable28!=0 ? taxable28*128/100 : emptyString}}</td>
+      <td class = "summary">{{taxable28!=0 ? (taxable28 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable28!=0) ? (taxable28*14/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable28!=0) ? (taxable28*14/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value!=27 && taxable28!=0) ? (taxable28*28/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{taxable28!=0 ? (taxable28*128/100 | number:'1.0-0') : emptyString}}</td>
     </tr>
     <tr>
       <td>TOTAL</td>
-      <td class = "summary">{{totalTaxAmt}}</td>
-      <td class = "summary">{{selectedState.value==27 ? taxable28*14/100 + taxable18*9/100 + taxable12*6/100 : emptyString}}</td>
-      <td class = "summary">{{selectedState.value==27 ? taxable28*14/100 + taxable18*9/100 + taxable12*6/100 : emptyString}}</td>
-      <td class = "summary">{{selectedState.value!=27 ? taxable28*28/100 + taxable18*18/100 + taxable12*12/100 : emptyString}}</td>
+      <td class = "summary">{{totalTaxAmt | number:'1.0-0'}}</td>
+      <td class = "summary">{{selectedState.value==27 ? (taxable28*14/100 + taxable18*9/100 + taxable12*6/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{selectedState.value==27 ? (taxable28*14/100 + taxable18*9/100 + taxable12*6/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{selectedState.value!=27 ? (taxable28*28/100 + taxable18*18/100 + taxable12*12/100 | number:'1.0-0') : emptyString}}</td>
       <td class = "summary">{{totalGross | number:'1.0-0'}}</td>
     </tr>
   </tbody>
