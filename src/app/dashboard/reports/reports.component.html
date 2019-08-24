@@ -18,20 +18,22 @@
   <div *ngIf = "result">
     <table id = "reportTable">
       <colgroup>
-        <col style="width: 10%">
-        <col style="width: 10%">
-        <col style="width: 15%">
+        <col style="width: 5%">
+        <col style="width: 7%">
+        <col style="width: 13%">
+        <col style="width: 19%">
         <col style="width: 400px">
-        <col style="width: 12%">
-        <col style="width: 12%">
-        <col style="width: 12%">
-        <col style="width: 15%">
+        <col style="width: 11%">
+        <col style="width: 9%">
+        <col style="width: 9%">
+        <col style="width: 13%">
       </colgroup>
       <thead>
       <tr>
       <th>Sr No.</th>
       <th>Bill No.</th>
       <th>Invoice Date</th>
+      <th>GST No.</th>
       <th>Customer Name</th>
       <th>Taxable Value</th>
       <th *ngIf = "displayRateColumn == 'all' || displayRateColumn == 18">GST 18%</th>
@@ -44,6 +46,7 @@
       <td>{{i+1}}</td>
       <td>{{resultRow.invoice_no}}</td>
       <td>{{resultRow.invoice_date}}</td>
+      <td>{{resultRow.gstNo}}</td>
       <td>{{resultRow.cust_name}}</td>
       <td>{{resultRow.taxable_value | number:'1.0-0'}}</td>
       <td *ngIf = "displayRateColumn == 'all' || displayRateColumn == 18">{{resultRow.taxable18 | number:'1.0-0'}}</td>
@@ -53,7 +56,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="4" style="background: #3f51b5; color: white">Total</td>
+        <td colspan="5" style="background: #3f51b5; color: white">Total</td>
         <td style="background: #3f51b5; color: white">{{value}}</td>
         <td style="background: #3f51b5; color: white" *ngIf = "displayRateColumn == 18 || displayRateColumn == 'all'">{{totalTax18 | number:'1.0-0'}}</td>
         <td style="background: #3f51b5; color: white" *ngIf = "displayRateColumn == 12 || displayRateColumn == 'all'">{{totalTax12 | number:'1.0-0'}}</td>

@@ -76,11 +76,6 @@ export class NewCustomerEntryComponent implements OnInit {
     {
       return;
     }
-    this.customer_list.checkGSTno(this.customerForm.get('gstNo').value).subscribe((res: []) =>{
-      if(res.length!=0 && this.customerForm.get('gstNo').value != 'URD'){
-        alert('Customer with GST No. already registered');
-        return;
-      }
       this.data_insert.insertCustomer(this.customerForm.value).subscribe(function(res){
         if(res.message=='success')
         {
@@ -91,7 +86,6 @@ export class NewCustomerEntryComponent implements OnInit {
         }
       });
       this.customerForm.reset();
-    });
   }
 
   ValidateGSTNO(control: FormControl) {

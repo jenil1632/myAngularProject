@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, AfterViewInit, QueryList } from '@angu
 import { PodateComponent } from './../../utils/podate/podate.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Invoice_info } from './../../services/invoice_info.service';
+import { Customer_list } from './../../services/customer_list.service';
 
 @Component({
   selector: 'app-reports',
@@ -24,7 +25,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   rates = [5, 12, 18, 'all'];
   displayRateColumn = 'all';
 
-  constructor(private invoice_info: Invoice_info) { }
+  constructor(private invoice_info: Invoice_info, private customer_list: Customer_list) { }
 
   ngOnInit() {
     this.reportsForm = new FormGroup({
@@ -81,7 +82,9 @@ export class ReportsComponent implements OnInit, AfterViewInit {
             });
             let tmpDate = new Date(invDate);
             let invoiceDate =  `${tmpDate.getDate()}/${tmpDate.getMonth()+1}/${tmpDate.getFullYear()}`;
-            this.resultArray.push({"invoice_no": inv.invoice_no, "invoice_date": invoiceDate, "cust_name": cName, "taxable18": tax18, "taxable12": tax12, "bill_value": total, "taxable_value": t_value});
+            this.customer_list.getCustomerData({"cust_name": cName}).subscribe((cData)=>{
+              this.resultArray.push({"invoice_no": inv.invoice_no, "gstNo": cData[0].gst_no, "invoice_date": invoiceDate, "cust_name": cName, "taxable18": tax18, "taxable12": tax12, "bill_value": total, "taxable_value": t_value});
+            });
           });
             this.resultArray.sort((a, b)=>{
               let dateArray1 = a.invoice_date.split("/");
