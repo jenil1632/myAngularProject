@@ -305,6 +305,7 @@ app.post('/checkGSTno', (req, res)=>{
 });
 
 app.post('/getCustomerData', (req, res)=>{
+  console.log(req.body);
     let queryString = `SELECT * FROM customers WHERE cust_name = '${req.body.cust_name.replace("\'", "\'\'")}';`;
     console.log(queryString);
     client.query(queryString, (err, result)=>{
@@ -342,7 +343,8 @@ app.post('/editProduct', (req, res)=>{
 });
 
 app.post('/editCustomer', (req, res)=>{
-       client.query(`UPDATE customers SET gst_no = '${req.body.gstNo}', address = '${req.body.address}', telephone = '${req.body.contactNo}', email = '${req.body.email}', contact_name = '${req.body.contactPerson}', state = '${req.body.state}' WHERE cust_name = '${req.body.customerName.cust_name.replace("\'", "\'\'")}'`, (err, result)=>{
+       const cName = req.body.customerName.cust_name? req.body.customerName.cust_name : req.body.customerName;
+       client.query(`UPDATE customers SET gst_no = '${req.body.gstNo}', address = '${req.body.address}', telephone = '${req.body.contactNo}', email = '${req.body.email}', contact_name = '${req.body.contactPerson}', state = '${req.body.state}' WHERE cust_name = '${cName.replace("\'", "\'\'")}'`, (err, result)=>{
          if(err)
          {
            console.log(err);

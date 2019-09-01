@@ -75,7 +75,8 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(){
     this.customerForm.get('customerName').valueChanges.pipe(distinctUntilChanged()).subscribe((e)=>{
-      this.customer_list.getCustomerData(e).subscribe((res)=>{
+      const val = e.cust_name? e : {cust_name: e};
+      this.customer_list.getCustomerData(val).subscribe((res)=>{
         if(res[0]!=undefined){
           this.customerForm.patchValue({"gstNo": res[0].gst_no});
           this.customerForm.patchValue({"address": res[0].address});
@@ -119,7 +120,7 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
           alert('Error inserting data');
         }
       });
-      this.customerForm.get('customerName').reset({"cust_name": ""});
+      this.customerForm.get('customerName').reset("");
       this.customerForm.get('gstNo').reset();
       this.customerForm.get('address').reset();
       this.customerForm.get('contactPerson').reset();
