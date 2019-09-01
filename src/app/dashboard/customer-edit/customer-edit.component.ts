@@ -105,12 +105,6 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
     {
       return;
     }
-    this.customer_list.checkGSTno(this.customerForm.get('gstNo').value).subscribe((res) =>{
-      if(res[0]!=undefined){
-        if(res[0].cust_name != this.customerForm.get('customerName').value.cust_name && this.customerForm.get('gstNo').value != 'URD'){console.log(this.customerForm.get('customerName').value);
-          return;
-        }
-      }
       this.data_insert.editCustomer(this.customerForm).subscribe(function(res){
         if(res.message=='success')
         {
@@ -127,7 +121,6 @@ export class CustomerEditComponent implements OnInit, AfterViewInit {
       this.customerForm.get('contactNo').reset();
       this.customerForm.get('email').reset();
       this.customerForm.get('state').reset();
-    });
   }
 
 }
