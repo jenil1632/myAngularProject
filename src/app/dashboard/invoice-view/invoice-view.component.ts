@@ -70,6 +70,7 @@ export class InvoiceViewComponent implements OnInit {
   {value: 37, viewValue: 'ANDHRA PRADESH (NEW)'}
 ];
 selectedState: State;
+taxable5: number = 0;
 taxable12: number = 0;
 taxable18: number = 0;
 taxable28: number = 0;
@@ -86,6 +87,7 @@ taxable28: number = 0;
         this.totalGross = 0;
         this.totalValue = 0;
         this.totalTaxAmt = 0;
+        this.taxable5 = 0;
         this.taxable12 = 0;
         this.taxable18 = 0;
         this.taxable28 = 0;
@@ -133,7 +135,11 @@ taxable28: number = 0;
          product.qty = info[i].qty;
          product.rate = info[i].unit_price;
          product.taxRate = info[i].tax_rate;
-         if(product.taxRate==12)
+         if(product.taxRate==5)
+         {
+           this.taxable5 += info[i].t_value;
+         }
+         else if(product.taxRate==12)
          {
            this.taxable12 += info[i].t_value;
          }

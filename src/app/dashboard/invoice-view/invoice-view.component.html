@@ -179,6 +179,14 @@
   </thead>
   <tbody>
     <tr>
+      <td>5</td>
+      <td class = "summary">{{taxable5!=0 ? (taxable5 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable5!=0) ? (taxable5*2.5/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value==27 && taxable5!=0) ? (taxable5*2.5/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{(selectedState.value!=27 && taxable5!=0) ? (taxable5*5/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{taxable5!=0 ? (taxable5*105/100 | number:'1.0-0') : emptyString}}</td>
+    </tr>
+    <tr>
       <td>12</td>
       <td class = "summary">{{taxable12!=0 ? (taxable12 | number:'1.0-0') : emptyString}}</td>
       <td class = "summary">{{(selectedState.value==27 && taxable12!=0) ? (taxable12*6/100 | number:'1.0-0') : emptyString}}</td>
@@ -205,9 +213,9 @@
     <tr>
       <td>TOTAL</td>
       <td class = "summary">{{totalTaxAmt | number:'1.0-0'}}</td>
-      <td class = "summary">{{selectedState.value==27 ? (taxable28*14/100 + taxable18*9/100 + taxable12*6/100 | number:'1.0-0') : emptyString}}</td>
-      <td class = "summary">{{selectedState.value==27 ? (taxable28*14/100 + taxable18*9/100 + taxable12*6/100 | number:'1.0-0') : emptyString}}</td>
-      <td class = "summary">{{selectedState.value!=27 ? (taxable28*28/100 + taxable18*18/100 + taxable12*12/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{selectedState.value==27 ? (taxable28*14/100 + taxable18*9/100 + taxable12*6/100 + taxable5*2.5/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{selectedState.value==27 ? (taxable28*14/100 + taxable18*9/100 + taxable12*6/100 + taxable5*2.5/100 | number:'1.0-0') : emptyString}}</td>
+      <td class = "summary">{{selectedState.value!=27 ? (taxable28*28/100 + taxable18*18/100 + taxable12*12/100 + taxable5*5/100 | number:'1.0-0') : emptyString}}</td>
       <td class = "summary">{{totalGross | number:'1.0-0'}}</td>
     </tr>
   </tbody>
