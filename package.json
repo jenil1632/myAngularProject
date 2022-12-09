@@ -28,7 +28,7 @@
     "body-parser": "^1.18.3",
     "caniuse-lite": "^1.0.30000974",
     "core-js": "^2.5.4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "hammerjs": "^2.0.8",
     "number-to-words": "^1.2.4",
     "pg": "^7.8.0",
